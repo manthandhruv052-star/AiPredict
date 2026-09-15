@@ -74,7 +74,7 @@ const related = (signalsData as Signal[])
           </section>
 
           <section class="evidence">
-            <h2 class="sec-head">Evidence</h2>
+            <h2 class="sec-head caret">Evidence</h2>
             <ol class="sources">
               {signal.sources.map((s) => (
                 <li class="source">
@@ -103,7 +103,7 @@ const related = (signalsData as Signal[])
 
           {related.length > 0 && (
             <section class="related">
-              <h2 class="sec-head">Related signals</h2>
+              <h2 class="sec-head caret">Related signals</h2>
               <ul>
                 {related.map((r) => (
                   <li>
@@ -136,7 +136,7 @@ const related = (signalsData as Signal[])
                     <div
                       class="comp-fill"
                       style={`width:${(comp.value / comp.max) * 100}%;background:${
-                        comp.key === 'Model judgment' ? 'var(--slate-faint)' : bandColor(c.band)
+                        comp.key === 'Model judgment' ? 'var(--text-faint)' : bandColor(c.band)
                       }`}
                     ></div>
                   </div>
@@ -151,7 +151,7 @@ const related = (signalsData as Signal[])
           </div>
 
           <div class="side-block">
-            <h3 class="side-head">Entities</h3>
+            <h3 class="side-head caret">Entities</h3>
             <ul class="ents">
               {signal.entities.map((e) => (
                 <li>
@@ -163,7 +163,7 @@ const related = (signalsData as Signal[])
           </div>
 
           <div class="side-block">
-            <h3 class="side-head">Record</h3>
+            <h3 class="side-head caret">Record</h3>
             <ul class="history">
               {signal.status_history.map((h) => (
                 <li>
@@ -190,10 +190,10 @@ const related = (signalsData as Signal[])
 
   .crumb {
     font-size: var(--t-xs);
-    color: var(--slate-faint);
+    color: var(--text-faint);
     margin-bottom: var(--gap-4);
   }
-  .crumb a { color: var(--slate-soft); }
+  .crumb a { color: var(--text-dim); }
 
   .head { margin-bottom: var(--gap-5); }
 
@@ -201,32 +201,31 @@ const related = (signalsData as Signal[])
     display: flex;
     gap: var(--gap-3);
     font-size: var(--t-xs);
-    color: var(--slate-faint);
+    color: var(--text-faint);
     margin-bottom: var(--gap-3);
   }
   .status { font-weight: 500; }
 
   .head h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(1.9rem, 4.5vw, 3rem);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    font-size: clamp(1.35rem, 2.6vw, 2rem);
+    line-height: 1.2;
+    letter-spacing: -0.018em;
     margin: 0 0 var(--gap-3);
-    max-width: 24ch;
+    max-width: 36ch;
   }
 
   .summary {
     font-size: var(--t-md);
     line-height: 1.6;
-    color: var(--slate);
+    color: var(--text-dim);
     margin: 0;
     max-width: 58ch;
   }
 
   .alert {
-    border-left: 3px solid var(--oxide);
-    background: color-mix(in srgb, var(--oxide) 7%, transparent);
+    border-left: 3px solid var(--red);
+    background: color-mix(in srgb, var(--red) 7%, transparent);
     padding: var(--gap-3) var(--gap-4);
     margin-bottom: var(--gap-5);
     font-size: var(--t-sm);
@@ -244,21 +243,20 @@ const related = (signalsData as Signal[])
   /* Analysis is visually quarantined from reporting — different ground,
      different type, an explicit note. This boundary is a trust feature. */
   .analysis {
-    background: var(--paper-sunk);
-    border-left: 3px solid var(--slate-faint);
+    background: var(--raised);
+    border-left: 3px solid var(--text-faint);
     padding: var(--gap-4);
     margin-bottom: var(--gap-6);
   }
   .analysis-label {
     font-size: var(--t-xs);
     font-weight: 500;
-    color: var(--slate-faint);
+    color: var(--text-faint);
     margin: 0 0 var(--gap-2);
   }
   .analysis-body {
-    font-family: var(--serif);
-    font-size: var(--t-md);
-    font-style: italic;
+    font-size: var(--t-sm);
+    font-style: normal;
     line-height: 1.5;
     margin: 0 0 var(--gap-2);
     max-width: 52ch;
@@ -266,16 +264,19 @@ const related = (signalsData as Signal[])
   .analysis-note {
     margin: 0;
     font-size: var(--t-xs);
-    color: var(--slate-faint);
+    color: var(--text-faint);
   }
 
   .sec-head {
-    font-size: var(--t-xs);
+    font-family: var(--mono);
+    font-size: var(--t-2xs);
     font-weight: 500;
-    color: var(--slate-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
     margin: 0 0 var(--gap-3);
     padding-bottom: var(--gap-2);
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--text);
   }
 
   .sources { list-style: none; margin: 0; padding: 0; counter-reset: src; }
@@ -296,20 +297,20 @@ const related = (signalsData as Signal[])
   .source-outlet {
     font-weight: 500;
     font-size: var(--t-sm);
-    color: var(--ink);
+    color: var(--text);
   }
-  .source-tier { color: var(--slate-faint); }
-  .source-tier[data-tier='1'] { color: var(--verdigris); }
-  .source-tier[data-tier='4'] { color: var(--oxide); }
-  .source-head time { margin-left: auto; color: var(--slate-faint); }
+  .source-tier { color: var(--text-faint); }
+  .source-tier[data-tier='1'] { color: var(--ember); }
+  .source-tier[data-tier='4'] { color: var(--red); }
+  .source-head time { margin-left: auto; color: var(--text-faint); }
 
   .source-excerpt {
     margin: 0 0 var(--gap-2);
     padding-left: var(--gap-3);
-    border-left: 2px solid var(--paper-edge);
+    border-left: 2px solid var(--line);
     font-size: var(--t-sm);
     line-height: 1.55;
-    color: var(--slate-soft);
+    color: var(--text-dim);
     max-width: 62ch;
   }
 
@@ -317,15 +318,15 @@ const related = (signalsData as Signal[])
     display: flex;
     gap: var(--gap-3);
     font-size: 0.7rem;
-    color: var(--slate-faint);
+    color: var(--text-faint);
   }
   .source-domain { font-family: var(--mono); }
-  .source-foot a { color: var(--slate-faint); }
+  .source-foot a { color: var(--text-faint); }
 
   .evidence-note {
     margin: var(--gap-3) 0 0;
     font-size: var(--t-xs);
-    color: var(--slate-faint);
+    color: var(--text-faint);
   }
 
   .related { margin-top: var(--gap-6); }
@@ -342,7 +343,7 @@ const related = (signalsData as Signal[])
   .related a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .related-score {
     font-variant-numeric: tabular-nums;
-    color: var(--slate-faint);
+    color: var(--text-faint);
     font-size: var(--t-xs);
   }
 
@@ -357,16 +358,16 @@ const related = (signalsData as Signal[])
   .conf {
     border: var(--rule);
     padding: var(--gap-4);
-    background: var(--paper-sunk);
+    background: var(--raised);
   }
   .conf-top { display: flex; align-items: baseline; gap: 0.4rem; }
   .conf-score {
-    font-family: var(--serif);
+    font-family: var(--sans);
     font-size: var(--t-2xl);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
-  .conf-of { font-size: var(--t-xs); color: var(--slate-faint); }
+  .conf-of { font-size: var(--t-xs); color: var(--text-faint); }
 
   .conf-phrase {
     margin: var(--gap-2) 0 var(--gap-1);
@@ -376,7 +377,7 @@ const related = (signalsData as Signal[])
   .conf-rationale {
     margin: 0 0 var(--gap-4);
     font-size: var(--t-xs);
-    color: var(--slate-soft);
+    color: var(--text-dim);
     line-height: 1.5;
   }
 
@@ -385,12 +386,12 @@ const related = (signalsData as Signal[])
     display: flex;
     justify-content: space-between;
     font-size: var(--t-xs);
-    color: var(--slate-soft);
+    color: var(--text-dim);
     margin-bottom: 0.3rem;
   }
   .comp-val { font-variant-numeric: tabular-nums; }
-  .comp-max { color: var(--slate-faint); }
-  .comp-bar { height: 3px; background: var(--paper-edge); }
+  .comp-max { color: var(--text-faint); }
+  .comp-bar { height: 3px; background: var(--line); }
   .comp-fill { height: 100%; }
 
   .conf-cap {
@@ -398,14 +399,17 @@ const related = (signalsData as Signal[])
     padding-top: var(--gap-3);
     border-top: var(--rule);
     font-size: var(--t-xs);
-    color: var(--slate-faint);
+    color: var(--text-faint);
     line-height: 1.5;
   }
 
   .side-head {
-    font-size: var(--t-xs);
+    font-family: var(--mono);
+    font-size: var(--t-2xs);
     font-weight: 500;
-    color: var(--slate-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
     margin: 0 0 var(--gap-3);
     padding-bottom: var(--gap-2);
     border-bottom: var(--rule);
@@ -419,20 +423,20 @@ const related = (signalsData as Signal[])
     padding-block: 0.4rem;
     font-size: var(--t-sm);
   }
-  .ent-role { font-size: 0.7rem; color: var(--slate-faint); }
+  .ent-role { font-size: 0.7rem; color: var(--text-faint); }
 
   .history li {
     padding-block: 0.5rem;
-    border-bottom: 1px dotted var(--paper-edge);
+    border-bottom: 1px dotted var(--line);
     font-size: var(--t-xs);
   }
   .hist-to { display: block; font-weight: 500; margin-bottom: 0.15rem; }
-  .hist-reason { color: var(--slate-faint); line-height: 1.45; }
+  .hist-reason { color: var(--text-faint); line-height: 1.45; }
 
   .cluster-note {
     margin: var(--gap-3) 0 0;
     font-size: var(--t-xs);
-    color: var(--slate-faint);
+    color: var(--text-faint);
     line-height: 1.5;
   }
 

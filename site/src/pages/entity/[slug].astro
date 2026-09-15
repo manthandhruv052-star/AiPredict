@@ -60,7 +60,7 @@ const KIND_NOUN: Record<string, string> = {
 
   <section class="timeline">
     <div class="shell">
-      <h2 class="sec-head">Everything tracked</h2>
+      <h2 class="sec-head caret">Everything tracked</h2>
       {entries.map((entry) => <SignalRow entry={entry} hideEntity={entity.id} />)}
     </div>
   </section>
@@ -69,21 +69,20 @@ const KIND_NOUN: Record<string, string> = {
 <style>
   .profile { padding-block: var(--gap-5); border-bottom: var(--rule); }
 
-  .crumb { font-size: var(--t-xs); color: var(--slate-faint); margin-bottom: var(--gap-4); }
-  .crumb a { color: var(--slate-soft); }
+  .crumb { font-size: var(--t-xs); color: var(--text-faint); margin-bottom: var(--gap-4); }
+  .crumb a { color: var(--text-dim); }
 
   .profile-head h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2.2rem, 6vw, var(--t-2xl));
-    letter-spacing: -0.025em;
-    line-height: 1.05;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin: 0 0 var(--gap-2);
   }
 
   .lede {
     margin: 0 0 var(--gap-5);
-    color: var(--slate-soft);
+    color: var(--text-dim);
     font-size: var(--t-md);
     max-width: 50ch;
   }
@@ -97,21 +96,24 @@ const KIND_NOUN: Record<string, string> = {
   }
   .spread-item { display: flex; flex-direction: column; gap: 0.15rem; }
   .spread-n {
-    font-family: var(--serif);
+    font-family: var(--mono);
     font-size: var(--t-xl);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
-  .spread-label { font-size: var(--t-xs); color: var(--slate-faint); }
+  .spread-label { font-size: var(--t-xs); color: var(--text-faint); }
 
   .timeline { padding-top: var(--gap-5); }
 
   .sec-head {
-    font-size: var(--t-xs);
+    font-family: var(--mono);
+    font-size: var(--t-2xs);
     font-weight: 500;
-    color: var(--slate-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
     margin: 0 0 var(--gap-3);
     padding-bottom: var(--gap-2);
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--text);
   }
 </style>

@@ -34,7 +34,7 @@ const busiest = Math.max(...entities.map((e) => e.signal_count));
     <div class="shell">
       {grouped.map((group) => (
         <div class="group">
-          <h2 class="group-head">{KIND_NOUN[group.kind]}</h2>
+          <h2 class="group-head caret">{KIND_NOUN[group.kind]}</h2>
           <ul class="ents">
             {group.items.map((e) => (
               <li class="ent">
@@ -58,26 +58,28 @@ const busiest = Math.max(...entities.map((e) => e.signal_count));
 <style>
   .head { padding-block: var(--gap-6) var(--gap-5); border-bottom: var(--rule); }
   .head h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2rem, 5vw, var(--t-2xl));
-    letter-spacing: -0.022em;
-    line-height: 1.08;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    letter-spacing: -0.02em;
+    line-height: 1.12;
     margin: 0 0 var(--gap-3);
     max-width: 16ch;
   }
-  .lede { margin: 0; color: var(--slate-soft); max-width: 52ch; font-size: var(--t-md); }
+  .lede { margin: 0; color: var(--text-dim); max-width: 52ch; font-size: var(--t-md); }
 
   .listing { padding-top: var(--gap-5); }
   .group { margin-bottom: var(--gap-6); }
 
   .group-head {
-    font-size: var(--t-xs);
+    font-family: var(--mono);
+    font-size: var(--t-2xs);
     font-weight: 500;
-    color: var(--slate-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
     margin: 0 0 var(--gap-2);
     padding-bottom: var(--gap-2);
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--text);
   }
 
   .ents { list-style: none; margin: 0; padding: 0; }
@@ -92,21 +94,21 @@ const busiest = Math.max(...entities.map((e) => e.signal_count));
     text-decoration: none;
     transition: background 0.12s;
   }
-  .ent-link:hover { background: var(--paper-sunk); }
+  .ent-link:hover { background: var(--raised); }
 
   .ent-name { font-size: var(--t-base); }
 
   /* Volume as a bar: scanning who is busiest is the point of this page. */
-  .ent-bar { height: 2px; background: var(--paper-edge); }
-  .ent-fill { display: block; height: 100%; background: var(--slate-faint); }
+  .ent-bar { height: 2px; background: var(--line); }
+  .ent-fill { display: block; height: 100%; background: var(--rust); }
 
   .ent-n {
-    font-family: var(--serif);
-    font-size: var(--t-md);
+    font-family: var(--mono);
+    font-size: var(--t-sm);
     text-align: right;
     font-variant-numeric: tabular-nums;
   }
-  .ent-when { font-size: var(--t-xs); color: var(--slate-faint); text-align: right; }
+  .ent-when { font-size: var(--t-xs); color: var(--text-faint); text-align: right; }
 
   @media (max-width: 640px) {
     .ent-link { grid-template-columns: 1fr 2.5rem; gap: var(--gap-2); }

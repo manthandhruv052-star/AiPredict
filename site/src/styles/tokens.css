@@ -1,90 +1,98 @@
 /*
- * The evidence ledger — design tokens.
+ * Signal Index — terminal console, orange on black.
  *
- * Concept: this product's claim is not "here is news" but "here is how
- * certain we are, and why". Confidence is therefore the primary structural
- * device, not a badge. Signals are set as ledger entries whose left rule
- * encodes certainty as length and hue.
+ * Direction: true black ground, orange as the entire identity, high
+ * information density. Space Grotesk carries the interface (geometric with
+ * odd letterforms — modern without reading as a default), IBM Plex Mono
+ * carries every figure and every piece of chrome.
  *
- * Palette is drawn from oxidized metal and archival paper rather than the
- * neon-on-black terminal cliché: this is a record, not a trading screen.
+ * Terminal grammar (prompt line, carets, block cursor) is used sparingly so
+ * it reads as craft rather than costume.
+ *
+ * The confidence rule survives from earlier revisions because it is the
+ * product's one real idea: a signal's left spine is filled to its score, so
+ * certainty reads before the words do.
+ *
+ * Dark is the default here, not a media-query afterthought. A light variant
+ * exists for anyone who forces it, but the design is built for the dark.
  */
 
 :root {
-  /* Ground */
-  --paper: #f7f5f0;
-  --paper-sunk: #efece4;
-  --paper-edge: #e2ded2;
-  --ink: #0d0f14;
-  --slate: #2b2f3a;
-  --slate-soft: #5d6472;
-  --slate-faint: #8b91a0;
+  /* Ground — true blacks warmed very slightly, so orange sits on it without
+     vibrating. Neutral-cool greys would fight the accent. */
+  --void: #000000;
+  --ground: #070706;
+  --raised: #0f0e0c;
+  --raised-2: #16140f;
+  --line: #241f18;
+  --line-bright: #3a3125;
 
-  /* Confidence, as oxidized metal */
-  --verdigris: #3d6b4a;  /* confirmed / verified */
-  --brass: #c4952a;      /* developing / moderate */
-  --oxide: #b4442e;      /* debunked / contradicted */
-  --graphite: #767c8a;   /* unverified / low */
+  /* Text — warm off-white, never pure #fff against black */
+  --text: #f2ede4;
+  --text-dim: #a09786;
+  --text-faint: #6b6355;
 
-  /* Type */
-  --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
-  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  /* Orange is the whole identity, so it is graded rather than used flat:
+     ember for emphasis, amber for the mid range, rust for the quiet end.
+     Red stays distinct enough to read as an alarm, not more orange. */
+  --ember: #ff6b1a;
+  --amber: #d98c2b;
+  --rust: #c05e21;
+  --red: #e5484d;
+  --grey: #5c554a;
 
-  /* Scale — a modular progression, not arbitrary steps */
+  /* Type — geometric sans with odd letterforms, engineered mono for data.
+     Deliberately not the Inter/JetBrains default pairing. */
+  --sans: 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Scale — tighter than editorial; density is the point */
+  --t-2xs: 0.6875rem;
   --t-xs: 0.75rem;
   --t-sm: 0.8125rem;
-  --t-base: 0.9375rem;
-  --t-md: 1.0625rem;
-  --t-lg: 1.375rem;
-  --t-xl: 2rem;
-  --t-2xl: 3.25rem;
-  --t-3xl: 4.5rem;
+  --t-base: 0.875rem;
+  --t-md: 1rem;
+  --t-lg: 1.1875rem;
+  --t-xl: 1.625rem;
+  --t-2xl: 2.5rem;
+  --t-3xl: 3.5rem;
 
   /* Rhythm */
   --gap-1: 0.25rem;
   --gap-2: 0.5rem;
-  --gap-3: 0.875rem;
-  --gap-4: 1.375rem;
-  --gap-5: 2.25rem;
-  --gap-6: 3.5rem;
-  --gap-7: 5.5rem;
+  --gap-3: 0.75rem;
+  --gap-4: 1.125rem;
+  --gap-5: 1.75rem;
+  --gap-6: 2.75rem;
+  --gap-7: 4.5rem;
 
-  --rule: 1px solid var(--paper-edge);
-  --measure: 68ch;
-  --shell: 1180px;
+  --rule: 1px solid var(--line);
+  --shell: 1440px;
+
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --paper: #0f1115;
-    --paper-sunk: #161920;
-    --paper-edge: #262b35;
-    --ink: #f2f0ea;
-    --slate: #d6d9e0;
-    --slate-soft: #9aa1b0;
-    --slate-faint: #6c7383;
+/* Light variant for anyone who explicitly forces it. The design is dark-first;
+   this keeps it legible rather than pretending to be a second design. */
+:root[data-theme='light'] {
+  --void: #ebe7e0;
+  --ground: #f5f2ec;
+  --raised: #ffffff;
+  --raised-2: #efebe3;
+  --line: #ddd7cc;
+  --line-bright: #c4bcae;
 
-    --verdigris: #6fae80;
-    --brass: #dcb257;
-    --oxide: #e0705a;
-    --graphite: #8b92a1;
-  }
-}
+  --text: #16140f;
+  --text-dim: #4f4a40;
+  --text-faint: #7d7566;
 
-:root[data-theme='dark'] {
-  --paper: #0f1115;
-  --paper-sunk: #161920;
-  --paper-edge: #262b35;
-  --ink: #f2f0ea;
-  --slate: #d6d9e0;
-  --slate-soft: #9aa1b0;
-  --slate-faint: #6c7383;
+  --ember: #c2410c;
+  --amber: #a16207;
+  --rust: #8a4f1d;
+  --red: #b91c1c;
+  --grey: #6b6455;
 
-  --verdigris: #6fae80;
-  --brass: #dcb257;
-  --oxide: #e0705a;
-  --graphite: #8b92a1;
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -105,35 +113,58 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--ground);
+  color: var(--text);
   font-family: var(--sans);
   font-size: var(--t-base);
-  line-height: 1.6;
-  font-feature-settings: 'kern' 1, 'liga' 1, 'cv05' 1;
+  line-height: 1.55;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'tnum' 1;
   -webkit-font-smoothing: antialiased;
-  /* Nothing on this site may scroll the page sideways. Tables and the
-     spectrum plot opt into their own overflow containers instead. */
   overflow-x: hidden;
 }
 
-/* Long unbroken strings (URLs, model identifiers) must not force width. */
-h1, h2, h3, p, li, blockquote, a {
-  overflow-wrap: break-word;
-}
+h1, h2, h3, p, li, blockquote, a { overflow-wrap: break-word; }
 
 a { color: inherit; }
 
 :focus-visible {
-  outline: 2px solid var(--verdigris);
-  outline-offset: 3px;
-  border-radius: 1px;
+  outline: 1px solid var(--ember);
+  outline-offset: 2px;
+}
+
+/* Terminal grammar, used sparingly so it reads as craft rather than costume:
+   a prompt caret before section labels, and a block cursor on the live stamp. */
+.caret::before {
+  content: '▸';
+  color: var(--ember);
+  margin-right: 0.45em;
+  font-size: 0.85em;
+}
+
+.cursor::after {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 0.3em;
+  background: var(--ember);
+  vertical-align: text-bottom;
+  animation: blink 1.2s steps(2, start) infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Every figure on this site is monospace and tabular — columns of numbers
+   must align for scanning. */
+.num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
 }
 
 .shell {
   max-width: var(--shell);
   margin: 0 auto;
-  padding-inline: clamp(1rem, 4vw, 2.75rem);
+  padding-inline: clamp(1rem, 2.5vw, 2rem);
 }
 
 .sr-only {

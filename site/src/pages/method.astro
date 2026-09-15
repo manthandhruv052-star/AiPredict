@@ -121,17 +121,16 @@ const components = [
 <style>
   .head { padding-block: var(--gap-6) var(--gap-5); border-bottom: var(--rule); }
   .head h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2rem, 5.5vw, var(--t-2xl));
-    letter-spacing: -0.022em;
-    line-height: 1.08;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    letter-spacing: -0.02em;
+    line-height: 1.12;
     margin: 0 0 var(--gap-3);
     max-width: 17ch;
   }
   .lede {
     margin: 0;
-    color: var(--slate-soft);
+    color: var(--text-dim);
     font-size: var(--t-md);
     line-height: 1.6;
     max-width: 58ch;
@@ -139,17 +138,16 @@ const components = [
 
   .body { padding-top: var(--gap-6); padding-bottom: var(--gap-6); }
 
-  .block { margin-bottom: var(--gap-6); max-width: var(--measure); }
+  .block { margin-bottom: var(--gap-6); max-width: 68ch; }
 
   .block h2 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: var(--t-xl);
+    font-weight: 600;
+    font-size: var(--t-lg);
     letter-spacing: -0.015em;
     margin: 0 0 var(--gap-3);
   }
 
-  .block p { margin: 0 0 var(--gap-3); line-height: 1.65; color: var(--slate); }
+  .block p { margin: 0 0 var(--gap-3); line-height: 1.65; color: var(--text-dim); }
   .block p:last-child { margin-bottom: 0; }
   .block em { font-style: italic; }
 
@@ -175,26 +173,26 @@ const components = [
   }
   .component-max {
     font-size: var(--t-xs);
-    color: var(--slate-faint);
+    color: var(--text-faint);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
   .component-bar {
     height: 3px;
-    background: var(--paper-edge);
+    background: var(--line);
     margin-block: 0.5rem;
   }
-  .component-fill { height: 100%; background: var(--verdigris); }
+  .component-fill { height: 100%; background: var(--ember); }
   .component p {
     margin: 0;
     font-size: var(--t-sm);
-    color: var(--slate-soft);
+    color: var(--text-dim);
     line-height: 1.55;
   }
 
   .worked {
     padding-left: var(--gap-3);
-    border-left: 2px solid var(--brass);
+    border-left: 2px solid var(--amber);
     font-size: var(--t-sm);
   }
 
@@ -206,12 +204,12 @@ const components = [
   .limits li {
     padding-block: var(--gap-3);
     border-bottom: var(--rule);
-    color: var(--slate-soft);
+    color: var(--text-dim);
     line-height: 1.6;
   }
   .limits li::before {
     content: '—';
-    color: var(--oxide);
+    color: var(--red);
     margin-right: 0.6rem;
   }
 </style>

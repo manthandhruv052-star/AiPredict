@@ -15,20 +15,20 @@ export { SIGNAL_TYPE_LABELS, SIGNAL_TYPES } from '../../../pipeline/schema.ts';
 /** Maps a confidence band to its CSS custom property. */
 export function bandColor(band: ConfidenceBand): string {
   switch (band) {
-    case 'verified': return 'var(--verdigris)';
-    case 'high': return 'var(--verdigris)';
-    case 'moderate': return 'var(--brass)';
-    case 'low': return 'var(--graphite)';
+    case 'verified': return 'var(--ember)';
+    case 'high': return 'var(--rust)';
+    case 'moderate': return 'var(--amber)';
+    case 'low': return 'var(--grey)';
   }
 }
 
 export function statusColor(status: SignalStatus): string {
   switch (status) {
-    case 'confirmed': return 'var(--verdigris)';
-    case 'developing': return 'var(--brass)';
-    case 'debunked': return 'var(--oxide)';
-    case 'unverified': return 'var(--graphite)';
-    case 'stale': return 'var(--slate-faint)';
+    case 'confirmed': return 'var(--ember)';
+    case 'developing': return 'var(--amber)';
+    case 'debunked': return 'var(--red)';
+    case 'unverified': return 'var(--grey)';
+    case 'stale': return 'var(--text-faint)';
   }
 }
 

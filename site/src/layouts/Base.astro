@@ -8,6 +8,9 @@ interface Props {
 
 const { title, description = 'Structured intelligence on what is actually happening in AI.' } = Astro.props;
 const meta = await import('../data/meta.json');
+
+const stamp = new Date(meta.default.generated_at)
+  .toISOString().replace('T', ' ').slice(0, 16);
 ---
 
 <!doctype html>
@@ -17,21 +20,22 @@ const meta = await import('../data/meta.json');
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     />
   </head>
   <body>
     <a class="skip" href="#main">Skip to signals</a>
 
-    <header class="masthead">
-      <div class="shell masthead-inner">
-        <a class="wordmark" href="/">
-          <span class="wordmark-mark" aria-hidden="true"></span>
-          <span class="wordmark-text">Signal Index</span>
+    <header class="bar">
+      <div class="shell bar-inner">
+        <a class="mark" href="/">
+          <span class="mark-rule" aria-hidden="true"></span>
+          <span class="mark-name">SIGNAL<span class="mark-thin">INDEX</span></span>
         </a>
 
         <nav class="nav" aria-label="Primary">
@@ -40,10 +44,20 @@ const meta = await import('../data/meta.json');
           <a href="/method">Method</a>
         </nav>
 
-        <p class="pulse">
-          <span class="pulse-dot" aria-hidden="true"></span>
-          <span>{meta.default.signal_count} signals tracked</span>
-        </p>
+        <div class="telemetry">
+          <span class="tel">
+            <span class="tel-k">TRACKED</span>
+            <span class="tel-v num">{String(meta.default.signal_count).padStart(3, '0')}</span>
+          </span>
+          <span class="tel">
+            <span class="tel-k">LAST PASS</span>
+            <span class="tel-v num">{stamp}Z</span>
+          </span>
+          <span class="live">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span class="tel-k">LIVE</span>
+          </span>
+        </div>
       </div>
     </header>
 
@@ -51,16 +65,15 @@ const meta = await import('../data/meta.json');
       <slot />
     </main>
 
-    <footer class="footer">
-      <div class="shell footer-inner">
-        <p class="footer-claim">
-          Every claim on this site links to the source it came from. Nothing is
-          published that could not be traced back to a document we read.
+    <footer class="foot">
+      <div class="shell foot-inner">
+        <p class="foot-claim">
+          Every claim links to the source it came from. Nothing is published
+          that cannot be traced back to a document we read.
         </p>
-        <p class="footer-meta">
-          Last pass {new Date(meta.default.generated_at).toLocaleString('en-US', {
-            month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
-          })} UTC · <a href="/method">How confidence is scored</a>
+        <p class="foot-meta num">
+          SCHEMA v{meta.default.schema_version} · {meta.default.signal_count} SIGNALS ·
+          {meta.default.entity_count} ENTITIES · <a href="/method">METHOD</a>
         </p>
       </div>
     </footer>
@@ -70,130 +83,133 @@ const meta = await import('../data/meta.json');
         position: absolute;
         left: -9999px;
         top: 0;
-        background: var(--ink);
-        color: var(--paper);
-        padding: 0.75rem 1.25rem;
+        background: var(--ember);
+        color: var(--void);
+        padding: 0.65rem 1.1rem;
         z-index: 100;
         text-decoration: none;
+        font-size: var(--t-xs);
       }
       .skip:focus { left: 0; }
 
-      .masthead {
+      .bar {
         border-bottom: var(--rule);
+        background: var(--void);
         position: sticky;
         top: 0;
-        background: color-mix(in srgb, var(--paper) 88%, transparent);
-        backdrop-filter: blur(12px);
         z-index: 20;
         padding-top: env(safe-area-inset-top, 0px);
       }
 
-      .masthead-inner {
+      .bar-inner {
         display: flex;
         align-items: center;
         gap: var(--gap-5);
-        min-height: 4.25rem;
+        min-height: 3.25rem;
       }
 
-      .wordmark {
+      .mark {
         display: inline-flex;
-        align-items: baseline;
-        gap: 0.6rem;
+        align-items: center;
+        gap: 0.5rem;
         text-decoration: none;
         margin-right: auto;
       }
 
       /* The mark is the product's thesis in miniature: a confidence rule. */
-      .wordmark-mark {
+      .mark-rule {
         width: 3px;
-        height: 1.15rem;
+        height: 0.95rem;
         background: linear-gradient(
           to bottom,
-          var(--verdigris) 0 60%,
-          var(--brass) 60% 85%,
-          var(--graphite) 85% 100%
+          var(--ember) 0 55%,
+          var(--amber) 55% 82%,
+          var(--grey) 82% 100%
         );
-        transform: translateY(0.1rem);
       }
 
-      .wordmark-text {
-        font-family: var(--serif);
-        font-size: 1.5rem;
-        letter-spacing: -0.015em;
+      .mark-name {
+        font-family: var(--mono);
+        font-size: var(--t-sm);
+        font-weight: 600;
+        letter-spacing: 0.08em;
       }
+      .mark-thin { color: var(--text-faint); font-weight: 400; margin-left: 0.15em; }
 
       .nav {
         display: flex;
         gap: var(--gap-4);
-        font-size: var(--t-sm);
-        color: var(--slate-soft);
+        font-size: var(--t-xs);
+        color: var(--text-dim);
       }
       .nav a {
         text-decoration: none;
-        padding-bottom: 2px;
+        padding: 0.2rem 0;
         border-bottom: 1px solid transparent;
-        transition: color 0.15s, border-color 0.15s;
+        transition: color 0.12s, border-color 0.12s;
       }
-      .nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+      .nav a:hover { color: var(--ember); border-bottom-color: var(--ember); }
 
-      .pulse {
+      .telemetry {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        margin: 0;
-        font-size: var(--t-xs);
-        color: var(--slate-faint);
-        font-variant-numeric: tabular-nums;
+        gap: var(--gap-4);
       }
 
-      .pulse-dot {
-        width: 6px; height: 6px;
-        border-radius: 50%;
-        background: var(--verdigris);
-        box-shadow: 0 0 0 0 color-mix(in srgb, var(--verdigris) 60%, transparent);
-        animation: breathe 3.5s ease-in-out infinite;
+      .tel { display: inline-flex; align-items: baseline; gap: 0.4rem; }
+
+      .tel-k {
+        font-family: var(--mono);
+        font-size: var(--t-2xs);
+        letter-spacing: 0.1em;
+        color: var(--text-faint);
+      }
+      .tel-v { font-size: var(--t-2xs); color: var(--text-dim); }
+
+      .live { display: inline-flex; align-items: center; gap: 0.4rem; }
+      .live .tel-k { color: var(--ember); }
+
+      .live-dot {
+        width: 5px; height: 5px;
+        background: var(--ember);
+        animation: pulse 3s ease-in-out infinite;
       }
 
       /* The single ambient motion on the site: it signals "this is live". */
-      @keyframes breathe {
-        0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--verdigris) 55%, transparent); }
-        50%      { box-shadow: 0 0 0 5px color-mix(in srgb, var(--verdigris) 0%, transparent); }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.25; }
       }
 
-      .footer {
+      .foot {
         margin-top: var(--gap-7);
         border-top: var(--rule);
+        background: var(--void);
         padding-block: var(--gap-5);
         padding-bottom: calc(var(--gap-5) + env(safe-area-inset-bottom, 0px));
-        background: var(--paper-sunk);
       }
 
-      .footer-claim {
-        font-family: var(--serif);
-        font-size: var(--t-md);
-        max-width: 46ch;
+      .foot-claim {
         margin: 0 0 var(--gap-3);
-        line-height: 1.5;
+        max-width: 54ch;
+        color: var(--text-dim);
+        font-size: var(--t-sm);
+        line-height: 1.6;
       }
 
-      .footer-meta {
+      .foot-meta {
         margin: 0;
-        font-size: var(--t-xs);
-        color: var(--slate-faint);
+        font-size: var(--t-2xs);
+        letter-spacing: 0.06em;
+        color: var(--text-faint);
       }
-      .footer-meta a { color: var(--slate-soft); }
+      .foot-meta a { color: var(--rust); text-decoration: none; }
+      .foot-meta a:hover { color: var(--ember); }
 
-      @media (max-width: 640px) {
-        .masthead-inner {
-          gap: var(--gap-3);
-          flex-wrap: wrap;
-          min-height: 0;
-          padding-block: 0.75rem;
-        }
-        .wordmark { margin-right: 0; flex: 1 1 auto; }
-        .wordmark-text { font-size: 1.25rem; }
-        .nav { gap: var(--gap-3); font-size: var(--t-xs); }
-        .pulse { flex-basis: 100%; order: 3; }
+      @media (max-width: 860px) {
+        .bar-inner { flex-wrap: wrap; gap: var(--gap-3); padding-block: 0.6rem; min-height: 0; }
+        .mark { margin-right: 0; flex: 1 1 auto; }
+        .telemetry { flex-basis: 100%; order: 3; gap: var(--gap-3); flex-wrap: wrap; }
       }
     </style>
   </body>

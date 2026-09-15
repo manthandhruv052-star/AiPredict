@@ -1,10 +1,10 @@
 ---
 /**
- * A ledger entry.
+ * A signal row.
  *
- * The left rule is the design's one bold idea: its filled length IS the
- * confidence score, so certainty is legible before a single word is read.
- * Everything else on the row stays deliberately quiet.
+ * The left rule is the design's one carried-over idea: its filled length IS
+ * the confidence score, so certainty is legible before a word is read.
+ * Everything else is tuned for density and scanning.
  */
 import {
   bandColor, statusColor, STATUS_LABELS, relativeTime,
@@ -18,43 +18,40 @@ interface Props {
 }
 
 const { entry, hideEntity } = Astro.props;
-const shown = entry.entities
-  .filter((e) => e.id !== hideEntity)
-  .slice(0, 3);
+const shown = entry.entities.filter((e) => e.id !== hideEntity).slice(0, 3);
 const extraSources = entry.source_count - entry.top_sources.length;
 ---
 
 <article class="row">
   <div class="gauge" aria-hidden="true">
-    <div class="gauge-fill" style={`height:${entry.confidence_score}%;background:${bandColor(entry.confidence_band)}`}></div>
+    <div
+      class="gauge-fill"
+      style={`height:${entry.confidence_score}%;background:${bandColor(entry.confidence_band)}`}
+    ></div>
   </div>
 
   <div class="body">
     <div class="head">
-      <span class="kind" style={`--dot:${statusColor(entry.status)}`}>
-        <span class="kind-dot"></span>
-        {SIGNAL_TYPE_LABELS[entry.type]}
+      <span class="type">{SIGNAL_TYPE_LABELS[entry.type]}</span>
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="status" style={`color:${statusColor(entry.status)}`}>
+        {STATUS_LABELS[entry.status]}
       </span>
-      {entry.status !== 'confirmed' && (
-        <span class="status" style={`color:${statusColor(entry.status)}`}>
-          {STATUS_LABELS[entry.status]}
-        </span>
-      )}
-      <time class="when" datetime={entry.updated_at}>{relativeTime(entry.updated_at)}</time>
+      <time class="when num" datetime={entry.updated_at}>
+        {relativeTime(entry.updated_at)}
+      </time>
     </div>
 
-    <h2 class="title">
-      <a href={`/signal/${entry.id}`}>{entry.title}</a>
-    </h2>
+    <h2 class="title"><a href={`/signal/${entry.id}`}>{entry.title}</a></h2>
 
     <p class="summary">{entry.summary}</p>
 
     <div class="foot">
       <span class="sources">
         {entry.top_sources.map((s) => (
-          <span class="domain">{s.domain}</span>
+          <span class="domain" data-tier={s.tier}>{s.domain}</span>
         ))}
-        {extraSources > 0 && <span class="more">+{extraSources}</span>}
+        {extraSources > 0 && <span class="more num">+{extraSources}</span>}
       </span>
 
       {shown.length > 0 && (
@@ -68,11 +65,11 @@ const extraSources = entry.source_count - entry.top_sources.length;
   </div>
 
   <div class="score">
-    <span class="score-num" style={`color:${bandColor(entry.confidence_band)}`}>
-      {entry.confidence_score}
+    <span class="score-num num" style={`color:${bandColor(entry.confidence_band)}`}>
+      {String(entry.confidence_score).padStart(2, '0')}
     </span>
-    <span class="score-sub">
-      {entry.corroboration_count} {entry.corroboration_count === 1 ? 'source' : 'sources'}
+    <span class="score-sub num">
+      {entry.corroboration_count} SRC
     </span>
   </div>
 </article>
@@ -80,80 +77,59 @@ const extraSources = entry.source_count - entry.top_sources.length;
 <style>
   .row {
     display: grid;
-    grid-template-columns: 6px 1fr auto;
+    grid-template-columns: 3px minmax(0, 1fr) auto;
     gap: var(--gap-4);
-    padding-block: var(--gap-4);
+    padding: var(--gap-4) var(--gap-3) var(--gap-4) 0;
     border-bottom: var(--rule);
     align-items: start;
+    transition: background 0.1s;
   }
+  .row:hover { background: var(--raised); }
 
-  /* The confidence rule. Length encodes the score; it is the page's spine.
-     Weighted enough to read as an encoding rather than a divider. */
+  /* Confidence rule: length encodes the score. The page's spine. */
   .gauge {
     height: 100%;
-    min-height: 4.5rem;
-    background: var(--paper-edge);
+    min-height: 4rem;
+    background: var(--line);
     position: relative;
     align-self: stretch;
   }
-  .gauge-fill {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-  }
+  .gauge-fill { position: absolute; bottom: 0; left: 0; right: 0; }
 
   .body { min-width: 0; }
 
   .head {
     display: flex;
-    align-items: center;
-    gap: var(--gap-3);
-    font-size: var(--t-xs);
-    color: var(--slate-faint);
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: var(--t-2xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     margin-bottom: var(--gap-2);
   }
-
-  .kind {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--slate-soft);
-    font-weight: 500;
-  }
-  .kind-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--dot);
-  }
-
+  .type { color: var(--text-dim); }
+  .sep { color: var(--line-bright); }
   .status { font-weight: 500; }
-
-  .when { margin-left: auto; font-variant-numeric: tabular-nums; }
+  .when { margin-left: auto; color: var(--text-faint); text-transform: none; }
 
   .title {
-    font-family: var(--serif);
-    font-size: var(--t-lg);
-    font-weight: 400;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    font-size: var(--t-md);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
     margin: 0 0 var(--gap-2);
-    max-width: 34ch;
+    max-width: 62ch;
   }
-  .title a {
-    text-decoration: none;
-    background-image: linear-gradient(var(--ink), var(--ink));
-    background-size: 0% 1px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.25s ease;
-  }
-  .title a:hover { background-size: 100% 1px; }
+  .title a { text-decoration: none; transition: color 0.12s; }
+  .title a:hover { color: var(--ember); }
 
   .summary {
     margin: 0 0 var(--gap-3);
-    color: var(--slate-soft);
-    font-size: var(--t-base);
+    color: var(--text-dim);
+    font-size: var(--t-sm);
     line-height: 1.55;
-    max-width: 62ch;
+    max-width: 78ch;
   }
 
   .foot {
@@ -161,50 +137,54 @@ const extraSources = entry.source_count - entry.top_sources.length;
     flex-wrap: wrap;
     gap: var(--gap-3);
     align-items: baseline;
-    font-size: var(--t-xs);
   }
 
-  .sources { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+  .sources { display: flex; gap: 0.65rem; flex-wrap: wrap; }
 
-  /* Monospace earns its place here only: fixed width aids domain scanning. */
   .domain {
     font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--slate-faint);
+    font-size: var(--t-2xs);
+    color: var(--text-faint);
   }
-  .more { font-family: var(--mono); font-size: 0.7rem; color: var(--slate-faint); }
+  /* Primary sources are the strongest evidence; mark them in the accent. */
+  .domain[data-tier='1'] { color: var(--rust); }
+  .domain[data-tier='4'] { color: var(--red); opacity: 0.8; }
 
-  .entities { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-left: auto; }
+  .more { font-size: var(--t-2xs); color: var(--text-faint); }
+
+  .entities { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-left: auto; }
   .entity {
-    color: var(--slate-soft);
+    font-size: var(--t-2xs);
+    color: var(--text-dim);
     text-decoration: none;
-    border-bottom: 1px solid var(--paper-edge);
-    transition: border-color 0.15s;
+    padding: 0.1rem 0.35rem;
+    border: 1px solid var(--line);
+    transition: border-color 0.12s, color 0.12s;
   }
-  .entity:hover { border-bottom-color: var(--slate-soft); }
+  .entity:hover { color: var(--ember); border-color: var(--rust); }
 
   .score {
-    text-align: right;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    min-width: 4.5rem;
+    min-width: 3.5rem;
+    padding-top: 0.05rem;
   }
   .score-num {
-    font-family: var(--serif);
     font-size: var(--t-xl);
+    font-weight: 500;
     line-height: 1;
-    font-variant-numeric: tabular-nums;
   }
   .score-sub {
-    font-size: 0.7rem;
-    color: var(--slate-faint);
+    font-size: var(--t-2xs);
+    color: var(--text-faint);
     margin-top: 0.3rem;
+    letter-spacing: 0.06em;
     white-space: nowrap;
   }
 
   @media (max-width: 720px) {
-    .row { grid-template-columns: 3px 1fr; gap: var(--gap-3); }
+    .row { grid-template-columns: 3px minmax(0, 1fr); gap: var(--gap-3); }
     .score {
       grid-column: 2;
       flex-direction: row;
@@ -214,7 +194,7 @@ const extraSources = entry.source_count - entry.top_sources.length;
       margin-top: var(--gap-2);
     }
     .score-num { font-size: var(--t-lg); }
-    .title { font-size: var(--t-md); max-width: none; }
+    .summary { max-width: none; }
     .entities { margin-left: 0; }
   }
 </style>
