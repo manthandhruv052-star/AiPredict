@@ -1,0 +1,1504 @@
+[
+  {
+    "id": "sig_0001mistral-rele",
+    "schema_version": 2,
+    "type": "model_release",
+    "secondary_types": [],
+    "title": "Mistral releases Large 3 with 256k context window",
+    "summary": "Mistral AI released Large 3, its new flagship model with a 256k context window. The model is available via the Mistral API and on Azure AI Foundry from today.",
+    "why_it_matters": "Mistral is the only European lab shipping at frontier context lengths, which matters for EU customers with data residency constraints.",
+    "entities": [
+      {
+        "id": "org:mistral-ai",
+        "name": "Mistral AI",
+        "kind": "org",
+        "role": "subject",
+        "slug": "mistral-ai"
+      },
+      {
+        "id": "model:large-3",
+        "name": "Large 3",
+        "kind": "model",
+        "role": "subject",
+        "slug": "large-3"
+      },
+      {
+        "id": "org:microsoft",
+        "name": "Microsoft",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "microsoft"
+      }
+    ],
+    "primary_entity_id": "org:mistral-ai",
+    "status": "confirmed",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "confirmed",
+        "at": "2026-09-15T07:12:00.000Z",
+        "reason": "4 independent sources, including a primary source.",
+        "triggered_by": "primary_source",
+        "evidence_source_url": "https://mistral.ai/story/mistral-releases-large-3-with-256k-conte"
+      }
+    ],
+    "confidence": {
+      "score": 91,
+      "band": "verified",
+      "components": {
+        "corroboration": 32,
+        "source_tier": 35,
+        "llm_assessment": 14,
+        "consistency": 10
+      },
+      "rationale": "4 independent sources, including a primary source."
+    },
+    "corroboration_count": 4,
+    "sources": [
+      {
+        "url": "https://mistral.ai/story/mistral-releases-large-3-with-256k-conte",
+        "canonical_url": "https://mistral.ai/story/mistral-releases-large-3-with-256k-conte",
+        "domain": "mistral.ai",
+        "outlet": "Mistral AI",
+        "tier": 1,
+        "title": "Mistral releases Large 3 with 256k context window",
+        "published_at": "2026-09-15T07:12:00.000Z",
+        "discovered_at": "2026-09-15T07:12:00.000Z",
+        "excerpt": "Today we are releasing Large 3. The model supports a 256k context window and is available through the Mistral API and on Azure AI Foundry.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://mistral.ai/"
+      },
+      {
+        "url": "https://reuters.com/story/mistral-releases-large-3-with-256k-conte",
+        "canonical_url": "https://reuters.com/story/mistral-releases-large-3-with-256k-conte",
+        "domain": "reuters.com",
+        "outlet": "Reuters",
+        "tier": 2,
+        "title": "Mistral releases Large 3 with 256k context window",
+        "published_at": "2026-09-15T06:00:00.000Z",
+        "discovered_at": "2026-09-15T07:12:00.000Z",
+        "excerpt": "French startup Mistral AI released Large 3 on Monday, a flagship model with a 256k context window, deepening competition with larger US rivals.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://reuters.com/"
+      },
+      {
+        "url": "https://news.ycombinator.com/story/mistral-releases-large-3-with-256k-conte",
+        "canonical_url": "https://news.ycombinator.com/story/mistral-releases-large-3-with-256k-conte",
+        "domain": "news.ycombinator.com",
+        "outlet": "Hacker News",
+        "tier": 3,
+        "title": "Mistral releases Large 3 with 256k context window",
+        "published_at": "2026-09-15T03:36:00.000Z",
+        "discovered_at": "2026-09-15T07:12:00.000Z",
+        "excerpt": "Mistral Large 3 is out, with a 256k context window. Available on the Mistral API and Azure AI Foundry.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://news.ycombinator.com/"
+      },
+      {
+        "url": "https://techcrunch.com/story/mistral-releases-large-3-with-256k-conte",
+        "canonical_url": "https://techcrunch.com/story/mistral-releases-large-3-with-256k-conte",
+        "domain": "techcrunch.com",
+        "outlet": "TechCrunch",
+        "tier": 3,
+        "title": "Mistral releases Large 3 with 256k context window",
+        "published_at": "2026-09-15T04:48:00.000Z",
+        "discovered_at": "2026-09-15T07:12:00.000Z",
+        "excerpt": "Mistral has shipped Large 3, which the company says handles a 256k context window. It lands on the Mistral API and Azure AI Foundry at launch.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://techcrunch.com/"
+      }
+    ],
+    "source_count": 4,
+    "first_seen_at": "2026-09-15T07:12:00.000Z",
+    "updated_at": "2026-09-15T09:36:00.000Z",
+    "event_at": "2026-09-15T07:12:00.000Z",
+    "cluster": {
+      "doc_count": 12,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-15T07:12:00.000Z",
+      "flags": []
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": true,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0002internal-con",
+    "schema_version": 2,
+    "type": "rumor",
+    "secondary_types": [],
+    "title": "Internal configs reference an unreleased OpenAI reasoning model",
+    "summary": "Configuration files in an OpenAI client library briefly referenced a model identifier not present in the public API. The reference was removed in a subsequent commit.",
+    "why_it_matters": "Config leaks have preceded OpenAI launches before, but identifiers also appear for models that are cancelled or renamed. Treat the identifier, not the timeline, as the signal.",
+    "entities": [
+      {
+        "id": "org:openai",
+        "name": "OpenAI",
+        "kind": "org",
+        "role": "subject",
+        "slug": "openai"
+      },
+      {
+        "id": "person:sam-altman",
+        "name": "Sam Altman",
+        "kind": "person",
+        "role": "mentioned",
+        "slug": "sam-altman"
+      }
+    ],
+    "primary_entity_id": "org:openai",
+    "status": "developing",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "developing",
+        "at": "2026-09-15T00:00:00.000Z",
+        "reason": "3 independent sources, from established outlets, speculative framing.",
+        "triggered_by": "corroboration"
+      }
+    ],
+    "confidence": {
+      "score": 68,
+      "band": "high",
+      "components": {
+        "corroboration": 26,
+        "source_tier": 26,
+        "llm_assessment": 9,
+        "consistency": 7
+      },
+      "rationale": "3 independent sources, from established outlets, speculative framing."
+    },
+    "corroboration_count": 3,
+    "sources": [
+      {
+        "url": "https://theinformation.com/story/internal-configs-reference-an-unreleased",
+        "canonical_url": "https://theinformation.com/story/internal-configs-reference-an-unreleased",
+        "domain": "theinformation.com",
+        "outlet": "The Information",
+        "tier": 2,
+        "title": "Internal configs reference an unreleased OpenAI reasoning model",
+        "published_at": "2026-09-15T00:00:00.000Z",
+        "discovered_at": "2026-09-15T00:00:00.000Z",
+        "excerpt": "A configuration file shipped in an OpenAI client library briefly contained a model identifier that does not correspond to anything in the public API. It was removed in a later commit.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://theinformation.com/"
+      },
+      {
+        "url": "https://news.ycombinator.com/story/internal-configs-reference-an-unreleased",
+        "canonical_url": "https://news.ycombinator.com/story/internal-configs-reference-an-unreleased",
+        "domain": "news.ycombinator.com",
+        "outlet": "Hacker News",
+        "tier": 3,
+        "title": "Internal configs reference an unreleased OpenAI reasoning model",
+        "published_at": "2026-09-14T22:48:00.000Z",
+        "discovered_at": "2026-09-15T00:00:00.000Z",
+        "excerpt": "Someone spotted an unfamiliar model identifier in an OpenAI client library config. It was gone in the next commit.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://news.ycombinator.com/"
+      },
+      {
+        "url": "https://reddit.com/story/internal-configs-reference-an-unreleased",
+        "canonical_url": "https://reddit.com/story/internal-configs-reference-an-unreleased",
+        "domain": "reddit.com",
+        "outlet": "Reddit r/LocalLLaMA",
+        "tier": 4,
+        "title": "Internal configs reference an unreleased OpenAI reasoning model",
+        "published_at": "2026-09-14T21:36:00.000Z",
+        "discovered_at": "2026-09-15T00:00:00.000Z",
+        "excerpt": "The identifier showed up in an OpenAI client library and was removed in a subsequent commit. No idea whether it ships.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://reddit.com/"
+      }
+    ],
+    "source_count": 3,
+    "first_seen_at": "2026-09-15T00:00:00.000Z",
+    "updated_at": "2026-09-15T02:24:00.000Z",
+    "event_at": "2026-09-15T00:00:00.000Z",
+    "cluster": {
+      "doc_count": 9,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-15T00:00:00.000Z",
+      "flags": [
+        "speculative_language"
+      ]
+    },
+    "quality": {
+      "is_speculative": true,
+      "has_primary_source": false,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0009screenshot-c",
+    "schema_version": 2,
+    "type": "leak",
+    "secondary_types": [],
+    "title": "Screenshot claims to show an unreleased Anthropic pricing tier",
+    "summary": "An anonymous account posted a screenshot appearing to show an unannounced pricing tier. The image has not been independently verified.",
+    "why_it_matters": "Single-screenshot pricing leaks are among the most frequently fabricated artifacts in this space. Weight accordingly until a second source appears.",
+    "entities": [
+      {
+        "id": "org:anthropic",
+        "name": "Anthropic",
+        "kind": "org",
+        "role": "subject",
+        "slug": "anthropic"
+      }
+    ],
+    "primary_entity_id": "org:anthropic",
+    "status": "unverified",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "unverified",
+        "at": "2026-09-14T16:48:00.000Z",
+        "reason": "Single independent source, of low-trust provenance, speculative framing.",
+        "triggered_by": "corroboration"
+      }
+    ],
+    "confidence": {
+      "score": 25,
+      "band": "low",
+      "components": {
+        "corroboration": 8,
+        "source_tier": 5,
+        "llm_assessment": 5,
+        "consistency": 7
+      },
+      "rationale": "Single independent source, of low-trust provenance, speculative framing."
+    },
+    "corroboration_count": 1,
+    "sources": [
+      {
+        "url": "https://x.com/story/screenshot-claims-to-show-an-unreleased-",
+        "canonical_url": "https://x.com/story/screenshot-claims-to-show-an-unreleased-",
+        "domain": "x.com",
+        "outlet": "Anonymous account",
+        "tier": 4,
+        "title": "Screenshot claims to show an unreleased Anthropic pricing tier",
+        "published_at": "2026-09-14T16:48:00.000Z",
+        "discovered_at": "2026-09-14T16:48:00.000Z",
+        "excerpt": "An anonymous account posted a screenshot appearing to show an unannounced pricing tier. The image has not been independently verified.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://x.com/"
+      }
+    ],
+    "source_count": 1,
+    "first_seen_at": "2026-09-14T16:48:00.000Z",
+    "updated_at": "2026-09-14T19:12:00.000Z",
+    "event_at": "2026-09-14T16:48:00.000Z",
+    "cluster": {
+      "doc_count": 3,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-14T16:48:00.000Z",
+      "flags": [
+        "speculative_language",
+        "low_evidence"
+      ]
+    },
+    "quality": {
+      "is_speculative": true,
+      "has_primary_source": false,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0003cerebras-rai",
+    "schema_version": 2,
+    "type": "funding",
+    "secondary_types": [
+      "infrastructure"
+    ],
+    "title": "Cerebras raises $1.1 billion at an $8.1 billion valuation",
+    "summary": "Cerebras Systems raised $1.1 billion in a Series G round. The company said the funding will expand its wafer-scale chip manufacturing capacity.",
+    "why_it_matters": "Inference-specialized silicon is attracting capital at a moment when Nvidia supply remains the binding constraint for most labs.",
+    "entities": [
+      {
+        "id": "org:cerebras",
+        "name": "Cerebras",
+        "kind": "org",
+        "role": "subject",
+        "slug": "cerebras"
+      },
+      {
+        "id": "org:nvidia",
+        "name": "Nvidia",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "nvidia"
+      }
+    ],
+    "primary_entity_id": "org:cerebras",
+    "status": "confirmed",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "confirmed",
+        "at": "2026-09-14T09:36:00.000Z",
+        "reason": "4 independent sources, including a primary source.",
+        "triggered_by": "primary_source",
+        "evidence_source_url": "https://cerebras.net/story/cerebras-raises-1-1-billion-at-an-8-1-bi"
+      }
+    ],
+    "confidence": {
+      "score": 91,
+      "band": "verified",
+      "components": {
+        "corroboration": 32,
+        "source_tier": 35,
+        "llm_assessment": 14,
+        "consistency": 10
+      },
+      "rationale": "4 independent sources, including a primary source."
+    },
+    "corroboration_count": 4,
+    "sources": [
+      {
+        "url": "https://cerebras.net/story/cerebras-raises-1-1-billion-at-an-8-1-bi",
+        "canonical_url": "https://cerebras.net/story/cerebras-raises-1-1-billion-at-an-8-1-bi",
+        "domain": "cerebras.net",
+        "outlet": "Cerebras",
+        "tier": 1,
+        "title": "Cerebras raises $1.1 billion at an $8.1 billion valuation",
+        "published_at": "2026-09-14T09:36:00.000Z",
+        "discovered_at": "2026-09-14T09:36:00.000Z",
+        "excerpt": "We have closed a $1.1 billion Series G. The capital will go toward expanding manufacturing capacity for our wafer-scale systems.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://cerebras.net/"
+      },
+      {
+        "url": "https://reuters.com/story/cerebras-raises-1-1-billion-at-an-8-1-bi",
+        "canonical_url": "https://reuters.com/story/cerebras-raises-1-1-billion-at-an-8-1-bi",
+        "domain": "reuters.com",
+        "outlet": "Reuters",
+        "tier": 2,
+        "title": "Cerebras raises $1.1 billion at an $8.1 billion valuation",
+        "published_at": "2026-09-14T07:12:00.000Z",
+        "discovered_at": "2026-09-14T09:36:00.000Z",
+        "excerpt": "Chipmaker Cerebras Systems said it raised $1.1 billion in a Series G round to expand wafer-scale chip manufacturing capacity.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://reuters.com/"
+      },
+      {
+        "url": "https://bloomberg.com/story/cerebras-raises-1-1-billion-at-an-8-1-bi",
+        "canonical_url": "https://bloomberg.com/story/cerebras-raises-1-1-billion-at-an-8-1-bi",
+        "domain": "bloomberg.com",
+        "outlet": "Bloomberg",
+        "tier": 2,
+        "title": "Cerebras raises $1.1 billion at an $8.1 billion valuation",
+        "published_at": "2026-09-14T08:24:00.000Z",
+        "discovered_at": "2026-09-14T09:36:00.000Z",
+        "excerpt": "Cerebras Systems raised $1.1 billion at an $8.1 billion valuation, as investors continue to back alternatives to Nvidia hardware.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://bloomberg.com/"
+      },
+      {
+        "url": "https://cnbc.com/story/cerebras-raises-1-1-billion-at-an-8-1-bi",
+        "canonical_url": "https://cnbc.com/story/cerebras-raises-1-1-billion-at-an-8-1-bi",
+        "domain": "cnbc.com",
+        "outlet": "CNBC",
+        "tier": 3,
+        "title": "Cerebras raises $1.1 billion at an $8.1 billion valuation",
+        "published_at": "2026-09-14T06:00:00.000Z",
+        "discovered_at": "2026-09-14T09:36:00.000Z",
+        "excerpt": "Cerebras announced a $1.1 billion Series G. The company builds wafer-scale processors aimed at AI inference workloads.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://cnbc.com/"
+      }
+    ],
+    "source_count": 4,
+    "first_seen_at": "2026-09-14T09:36:00.000Z",
+    "updated_at": "2026-09-14T12:00:00.000Z",
+    "event_at": "2026-09-14T09:36:00.000Z",
+    "cluster": {
+      "doc_count": 12,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-14T09:36:00.000Z",
+      "flags": []
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": true,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0007vllm-ships-v",
+    "schema_version": 2,
+    "type": "open_source_dev",
+    "secondary_types": [],
+    "title": "vLLM ships v0.11 with improved multi-GPU scheduling",
+    "summary": "The vLLM project released version 0.11, which includes changes to multi-GPU request scheduling. The release notes cite throughput improvements under concurrent load.",
+    "why_it_matters": "vLLM is the default serving layer for most self-hosted deployments, so its scheduler changes propagate quickly across the open-weights ecosystem.",
+    "entities": [
+      {
+        "id": "repo:vllm",
+        "name": "vLLM",
+        "kind": "repo",
+        "role": "subject",
+        "slug": "vllm"
+      }
+    ],
+    "primary_entity_id": "repo:vllm",
+    "status": "confirmed",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "confirmed",
+        "at": "2026-09-13T16:48:00.000Z",
+        "reason": "2 independent sources, including a primary source.",
+        "triggered_by": "primary_source",
+        "evidence_source_url": "https://github.com/story/vllm-ships-v0-11-with-improved-multi-gpu"
+      }
+    ],
+    "confidence": {
+      "score": 77,
+      "band": "high",
+      "components": {
+        "corroboration": 18,
+        "source_tier": 35,
+        "llm_assessment": 14,
+        "consistency": 10
+      },
+      "rationale": "2 independent sources, including a primary source."
+    },
+    "corroboration_count": 2,
+    "sources": [
+      {
+        "url": "https://github.com/story/vllm-ships-v0-11-with-improved-multi-gpu",
+        "canonical_url": "https://github.com/story/vllm-ships-v0-11-with-improved-multi-gpu",
+        "domain": "github.com",
+        "outlet": "GitHub",
+        "tier": 1,
+        "title": "vLLM ships v0.11 with improved multi-GPU scheduling",
+        "published_at": "2026-09-13T16:48:00.000Z",
+        "discovered_at": "2026-09-13T16:48:00.000Z",
+        "excerpt": "The vLLM project released version 0.11, which includes changes to multi-GPU request scheduling. The release notes cite throughput improvements under concurrent load.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://github.com/"
+      },
+      {
+        "url": "https://news.ycombinator.com/story/vllm-ships-v0-11-with-improved-multi-gpu",
+        "canonical_url": "https://news.ycombinator.com/story/vllm-ships-v0-11-with-improved-multi-gpu",
+        "domain": "news.ycombinator.com",
+        "outlet": "Hacker News",
+        "tier": 3,
+        "title": "vLLM ships v0.11 with improved multi-GPU scheduling",
+        "published_at": "2026-09-13T15:36:00.000Z",
+        "discovered_at": "2026-09-13T16:48:00.000Z",
+        "excerpt": "The vLLM project released version 0.11, which includes changes to multi-GPU request scheduling. The release notes cite throughput improvements under concurrent load.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://news.ycombinator.com/"
+      }
+    ],
+    "source_count": 2,
+    "first_seen_at": "2026-09-13T16:48:00.000Z",
+    "updated_at": "2026-09-13T19:12:00.000Z",
+    "event_at": "2026-09-13T16:48:00.000Z",
+    "cluster": {
+      "doc_count": 6,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-13T16:48:00.000Z",
+      "flags": []
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": true,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0004researchers-",
+    "schema_version": 2,
+    "type": "ai_cyberattack",
+    "secondary_types": [
+      "security_incident"
+    ],
+    "title": "Researchers document prompt injection campaign against agent browsers",
+    "summary": "Security researchers documented a campaign embedding hidden instructions in web pages to hijack AI browsing agents. Affected agents exfiltrated session data to attacker-controlled endpoints.",
+    "why_it_matters": "This is the first documented in-the-wild campaign rather than a lab demonstration, which shifts prompt injection from theoretical to operational risk.",
+    "entities": [
+      {
+        "id": "org:anthropic",
+        "name": "Anthropic",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "anthropic"
+      },
+      {
+        "id": "org:openai",
+        "name": "OpenAI",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "openai"
+      }
+    ],
+    "primary_entity_id": "org:anthropic",
+    "status": "confirmed",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "confirmed",
+        "at": "2026-09-13T04:48:00.000Z",
+        "reason": "3 independent sources, including a primary source.",
+        "triggered_by": "primary_source",
+        "evidence_source_url": "https://nvd.nist.gov/story/researchers-document-prompt-injection-ca"
+      }
+    ],
+    "confidence": {
+      "score": 85,
+      "band": "verified",
+      "components": {
+        "corroboration": 26,
+        "source_tier": 35,
+        "llm_assessment": 14,
+        "consistency": 10
+      },
+      "rationale": "3 independent sources, including a primary source."
+    },
+    "corroboration_count": 3,
+    "sources": [
+      {
+        "url": "https://nvd.nist.gov/story/researchers-document-prompt-injection-ca",
+        "canonical_url": "https://nvd.nist.gov/story/researchers-document-prompt-injection-ca",
+        "domain": "nvd.nist.gov",
+        "outlet": "NVD",
+        "tier": 1,
+        "title": "Researchers document prompt injection campaign against agent browsers",
+        "published_at": "2026-09-13T04:48:00.000Z",
+        "discovered_at": "2026-09-13T04:48:00.000Z",
+        "excerpt": "Hidden instructions embedded in web page content can cause affected AI browsing agents to exfiltrate session data to attacker-controlled endpoints.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://nvd.nist.gov/"
+      },
+      {
+        "url": "https://arstechnica.com/story/researchers-document-prompt-injection-ca",
+        "canonical_url": "https://arstechnica.com/story/researchers-document-prompt-injection-ca",
+        "domain": "arstechnica.com",
+        "outlet": "Ars Technica",
+        "tier": 2,
+        "title": "Researchers document prompt injection campaign against agent browsers",
+        "published_at": "2026-09-13T03:36:00.000Z",
+        "discovered_at": "2026-09-13T04:48:00.000Z",
+        "excerpt": "Researchers have documented the first in-the-wild campaign using prompt injection against AI browsing agents, rather than a laboratory demonstration.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://arstechnica.com/"
+      },
+      {
+        "url": "https://bleepingcomputer.com/story/researchers-document-prompt-injection-ca",
+        "canonical_url": "https://bleepingcomputer.com/story/researchers-document-prompt-injection-ca",
+        "domain": "bleepingcomputer.com",
+        "outlet": "BleepingComputer",
+        "tier": 3,
+        "title": "Researchers document prompt injection campaign against agent browsers",
+        "published_at": "2026-09-13T02:24:00.000Z",
+        "discovered_at": "2026-09-13T04:48:00.000Z",
+        "excerpt": "Attackers embedded hidden instructions in web pages to hijack AI browsing agents, with affected agents sending session data to attacker-controlled endpoints.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://bleepingcomputer.com/"
+      }
+    ],
+    "source_count": 3,
+    "first_seen_at": "2026-09-13T04:48:00.000Z",
+    "updated_at": "2026-09-13T07:12:00.000Z",
+    "event_at": "2026-09-13T04:48:00.000Z",
+    "cluster": {
+      "doc_count": 9,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-13T04:48:00.000Z",
+      "flags": []
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": true,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0010nvidia-annou",
+    "schema_version": 2,
+    "type": "infrastructure",
+    "secondary_types": [],
+    "title": "Nvidia announces expanded datacenter capacity partnership",
+    "summary": "Nvidia announced an expanded partnership to add datacenter capacity for AI workloads. The announcement did not specify a dollar figure.",
+    "why_it_matters": "Capacity announcements are a leading indicator of which labs have secured compute for their next training run.",
+    "entities": [
+      {
+        "id": "org:nvidia",
+        "name": "Nvidia",
+        "kind": "org",
+        "role": "subject",
+        "slug": "nvidia"
+      }
+    ],
+    "primary_entity_id": "org:nvidia",
+    "status": "confirmed",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "confirmed",
+        "at": "2026-09-12T14:24:00.000Z",
+        "reason": "3 independent sources, including a primary source.",
+        "triggered_by": "primary_source",
+        "evidence_source_url": "https://nvidia.com/story/nvidia-announces-expanded-datacenter-cap"
+      }
+    ],
+    "confidence": {
+      "score": 85,
+      "band": "verified",
+      "components": {
+        "corroboration": 26,
+        "source_tier": 35,
+        "llm_assessment": 14,
+        "consistency": 10
+      },
+      "rationale": "3 independent sources, including a primary source."
+    },
+    "corroboration_count": 3,
+    "sources": [
+      {
+        "url": "https://nvidia.com/story/nvidia-announces-expanded-datacenter-cap",
+        "canonical_url": "https://nvidia.com/story/nvidia-announces-expanded-datacenter-cap",
+        "domain": "nvidia.com",
+        "outlet": "Nvidia",
+        "tier": 1,
+        "title": "Nvidia announces expanded datacenter capacity partnership",
+        "published_at": "2026-09-12T14:24:00.000Z",
+        "discovered_at": "2026-09-12T14:24:00.000Z",
+        "excerpt": "Nvidia announced an expanded partnership to add datacenter capacity for AI workloads. The announcement did not specify a dollar figure.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://nvidia.com/"
+      },
+      {
+        "url": "https://reuters.com/story/nvidia-announces-expanded-datacenter-cap",
+        "canonical_url": "https://reuters.com/story/nvidia-announces-expanded-datacenter-cap",
+        "domain": "reuters.com",
+        "outlet": "Reuters",
+        "tier": 2,
+        "title": "Nvidia announces expanded datacenter capacity partnership",
+        "published_at": "2026-09-12T12:00:00.000Z",
+        "discovered_at": "2026-09-12T14:24:00.000Z",
+        "excerpt": "Nvidia announced an expanded partnership to add datacenter capacity for AI workloads. The announcement did not specify a dollar figure.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://reuters.com/"
+      },
+      {
+        "url": "https://cnbc.com/story/nvidia-announces-expanded-datacenter-cap",
+        "canonical_url": "https://cnbc.com/story/nvidia-announces-expanded-datacenter-cap",
+        "domain": "cnbc.com",
+        "outlet": "CNBC",
+        "tier": 3,
+        "title": "Nvidia announces expanded datacenter capacity partnership",
+        "published_at": "2026-09-12T13:12:00.000Z",
+        "discovered_at": "2026-09-12T14:24:00.000Z",
+        "excerpt": "Nvidia announced an expanded partnership to add datacenter capacity for AI workloads. The announcement did not specify a dollar figure.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://cnbc.com/"
+      }
+    ],
+    "source_count": 3,
+    "first_seen_at": "2026-09-12T14:24:00.000Z",
+    "updated_at": "2026-09-12T16:48:00.000Z",
+    "event_at": "2026-09-12T14:24:00.000Z",
+    "cluster": {
+      "doc_count": 9,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-12T14:24:00.000Z",
+      "flags": []
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": true,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0005deepmind-rep",
+    "schema_version": 2,
+    "type": "research_breakthrough",
+    "secondary_types": [],
+    "title": "DeepMind reports improved sample efficiency in robotic manipulation",
+    "summary": "A DeepMind paper reports improved sample efficiency on robotic manipulation benchmarks using a modified training curriculum. The work was published on arXiv.",
+    "why_it_matters": "Sample efficiency is the practical bottleneck for robotics deployment, where real-world data collection is far more expensive than in language domains.",
+    "entities": [
+      {
+        "id": "org:deepmind",
+        "name": "DeepMind",
+        "kind": "org",
+        "role": "subject",
+        "slug": "deepmind"
+      },
+      {
+        "id": "org:google",
+        "name": "Google",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "google"
+      }
+    ],
+    "primary_entity_id": "org:deepmind",
+    "status": "confirmed",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "confirmed",
+        "at": "2026-09-12T12:00:00.000Z",
+        "reason": "3 independent sources, including a primary source.",
+        "triggered_by": "primary_source",
+        "evidence_source_url": "https://deepmind.google/story/deepmind-reports-improved-sample-efficie"
+      }
+    ],
+    "confidence": {
+      "score": 84,
+      "band": "high",
+      "components": {
+        "corroboration": 26,
+        "source_tier": 35,
+        "llm_assessment": 13,
+        "consistency": 10
+      },
+      "rationale": "3 independent sources, including a primary source."
+    },
+    "corroboration_count": 3,
+    "sources": [
+      {
+        "url": "https://deepmind.google/story/deepmind-reports-improved-sample-efficie",
+        "canonical_url": "https://deepmind.google/story/deepmind-reports-improved-sample-efficie",
+        "domain": "deepmind.google",
+        "outlet": "DeepMind",
+        "tier": 1,
+        "title": "DeepMind reports improved sample efficiency in robotic manipulation",
+        "published_at": "2026-09-12T10:48:00.000Z",
+        "discovered_at": "2026-09-12T12:00:00.000Z",
+        "excerpt": "A DeepMind paper reports improved sample efficiency on robotic manipulation benchmarks using a modified training curriculum. The work was published on arXiv.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://deepmind.google/"
+      },
+      {
+        "url": "https://arxiv.org/story/deepmind-reports-improved-sample-efficie",
+        "canonical_url": "https://arxiv.org/story/deepmind-reports-improved-sample-efficie",
+        "domain": "arxiv.org",
+        "outlet": "arXiv",
+        "tier": 1,
+        "title": "DeepMind reports improved sample efficiency in robotic manipulation",
+        "published_at": "2026-09-12T12:00:00.000Z",
+        "discovered_at": "2026-09-12T12:00:00.000Z",
+        "excerpt": "A DeepMind paper reports improved sample efficiency on robotic manipulation benchmarks using a modified training curriculum. The work was published on arXiv.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://arxiv.org/"
+      },
+      {
+        "url": "https://venturebeat.com/story/deepmind-reports-improved-sample-efficie",
+        "canonical_url": "https://venturebeat.com/story/deepmind-reports-improved-sample-efficie",
+        "domain": "venturebeat.com",
+        "outlet": "VentureBeat",
+        "tier": 3,
+        "title": "DeepMind reports improved sample efficiency in robotic manipulation",
+        "published_at": "2026-09-12T09:36:00.000Z",
+        "discovered_at": "2026-09-12T12:00:00.000Z",
+        "excerpt": "A DeepMind paper reports improved sample efficiency on robotic manipulation benchmarks using a modified training curriculum. The work was published on arXiv.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://venturebeat.com/"
+      }
+    ],
+    "source_count": 3,
+    "first_seen_at": "2026-09-12T12:00:00.000Z",
+    "updated_at": "2026-09-12T14:24:00.000Z",
+    "event_at": "2026-09-12T12:00:00.000Z",
+    "cluster": {
+      "doc_count": 9,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-12T12:00:00.000Z",
+      "flags": []
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": true,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0012hugging-face",
+    "schema_version": 2,
+    "type": "product_release",
+    "secondary_types": [],
+    "title": "Hugging Face ships a redesigned model evaluation interface",
+    "summary": "Hugging Face released a redesigned interface for model evaluation results. The update consolidates several previously separate leaderboards.",
+    "why_it_matters": "Evaluation infrastructure shapes which capabilities labs optimize for, making leaderboard design quietly influential.",
+    "entities": [
+      {
+        "id": "org:hugging-face",
+        "name": "Hugging Face",
+        "kind": "org",
+        "role": "subject",
+        "slug": "hugging-face"
+      }
+    ],
+    "primary_entity_id": "org:hugging-face",
+    "status": "confirmed",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "confirmed",
+        "at": "2026-09-11T19:12:00.000Z",
+        "reason": "2 independent sources, including a primary source.",
+        "triggered_by": "primary_source",
+        "evidence_source_url": "https://huggingface.co/story/hugging-face-ships-a-redesigned-model-ev"
+      }
+    ],
+    "confidence": {
+      "score": 77,
+      "band": "high",
+      "components": {
+        "corroboration": 18,
+        "source_tier": 35,
+        "llm_assessment": 14,
+        "consistency": 10
+      },
+      "rationale": "2 independent sources, including a primary source."
+    },
+    "corroboration_count": 2,
+    "sources": [
+      {
+        "url": "https://huggingface.co/story/hugging-face-ships-a-redesigned-model-ev",
+        "canonical_url": "https://huggingface.co/story/hugging-face-ships-a-redesigned-model-ev",
+        "domain": "huggingface.co",
+        "outlet": "Hugging Face",
+        "tier": 1,
+        "title": "Hugging Face ships a redesigned model evaluation interface",
+        "published_at": "2026-09-11T19:12:00.000Z",
+        "discovered_at": "2026-09-11T19:12:00.000Z",
+        "excerpt": "Hugging Face released a redesigned interface for model evaluation results. The update consolidates several previously separate leaderboards.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://huggingface.co/"
+      },
+      {
+        "url": "https://news.ycombinator.com/story/hugging-face-ships-a-redesigned-model-ev",
+        "canonical_url": "https://news.ycombinator.com/story/hugging-face-ships-a-redesigned-model-ev",
+        "domain": "news.ycombinator.com",
+        "outlet": "Hacker News",
+        "tier": 3,
+        "title": "Hugging Face ships a redesigned model evaluation interface",
+        "published_at": "2026-09-11T18:00:00.000Z",
+        "discovered_at": "2026-09-11T19:12:00.000Z",
+        "excerpt": "Hugging Face released a redesigned interface for model evaluation results. The update consolidates several previously separate leaderboards.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://news.ycombinator.com/"
+      }
+    ],
+    "source_count": 2,
+    "first_seen_at": "2026-09-11T19:12:00.000Z",
+    "updated_at": "2026-09-11T21:36:00.000Z",
+    "event_at": "2026-09-11T19:12:00.000Z",
+    "cluster": {
+      "doc_count": 6,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-11T19:12:00.000Z",
+      "flags": []
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": true,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0006eu-ai-office",
+    "schema_version": 2,
+    "type": "regulatory",
+    "secondary_types": [],
+    "title": "EU AI Office opens consultation on general-purpose model obligations",
+    "summary": "The EU AI Office opened a public consultation on transparency obligations for general-purpose AI models. The consultation period runs for eight weeks.",
+    "why_it_matters": "The resulting guidance will determine compliance cost for any lab serving EU users, and consultations are where that cost is actually negotiated.",
+    "entities": [
+      {
+        "id": "org:european-union",
+        "name": "European Union",
+        "kind": "org",
+        "role": "subject",
+        "slug": "european-union"
+      },
+      {
+        "id": "regulation:eu-ai-act",
+        "name": "EU AI Act",
+        "kind": "regulation",
+        "role": "subject",
+        "slug": "eu-ai-act"
+      }
+    ],
+    "primary_entity_id": "org:european-union",
+    "status": "developing",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "developing",
+        "at": "2026-09-11T07:12:00.000Z",
+        "reason": "2 independent sources, including a primary source.",
+        "triggered_by": "primary_source",
+        "evidence_source_url": "https://ec.europa.eu/story/eu-ai-office-opens-consultation-on-gener"
+      }
+    ],
+    "confidence": {
+      "score": 77,
+      "band": "high",
+      "components": {
+        "corroboration": 18,
+        "source_tier": 35,
+        "llm_assessment": 14,
+        "consistency": 10
+      },
+      "rationale": "2 independent sources, including a primary source."
+    },
+    "corroboration_count": 2,
+    "sources": [
+      {
+        "url": "https://ec.europa.eu/story/eu-ai-office-opens-consultation-on-gener",
+        "canonical_url": "https://ec.europa.eu/story/eu-ai-office-opens-consultation-on-gener",
+        "domain": "ec.europa.eu",
+        "outlet": "European Commission",
+        "tier": 1,
+        "title": "EU AI Office opens consultation on general-purpose model obligations",
+        "published_at": "2026-09-11T07:12:00.000Z",
+        "discovered_at": "2026-09-11T07:12:00.000Z",
+        "excerpt": "The EU AI Office opened a public consultation on transparency obligations for general-purpose AI models. The consultation period runs for eight weeks.",
+        "is_primary": true,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://ec.europa.eu/"
+      },
+      {
+        "url": "https://politico.com/story/eu-ai-office-opens-consultation-on-gener",
+        "canonical_url": "https://politico.com/story/eu-ai-office-opens-consultation-on-gener",
+        "domain": "politico.com",
+        "outlet": "Politico",
+        "tier": 2,
+        "title": "EU AI Office opens consultation on general-purpose model obligations",
+        "published_at": "2026-09-11T06:00:00.000Z",
+        "discovered_at": "2026-09-11T07:12:00.000Z",
+        "excerpt": "The EU AI Office opened a public consultation on transparency obligations for general-purpose AI models. The consultation period runs for eight weeks.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://politico.com/"
+      }
+    ],
+    "source_count": 2,
+    "first_seen_at": "2026-09-11T07:12:00.000Z",
+    "updated_at": "2026-09-11T09:36:00.000Z",
+    "event_at": "2026-09-11T07:12:00.000Z",
+    "cluster": {
+      "doc_count": 6,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-11T07:12:00.000Z",
+      "flags": []
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": true,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0008meta-reorgan",
+    "schema_version": 2,
+    "type": "hiring",
+    "secondary_types": [],
+    "title": "Meta reorganizes its superintelligence group under a new structure",
+    "summary": "Meta reorganized its AI research organization, consolidating several teams. Multiple researchers announced departures in the days following.",
+    "why_it_matters": "Reorganizations at this scale usually precede a strategy shift, and departure patterns often reveal which research directions were deprioritized.",
+    "entities": [
+      {
+        "id": "org:meta",
+        "name": "Meta",
+        "kind": "org",
+        "role": "subject",
+        "slug": "meta"
+      }
+    ],
+    "primary_entity_id": "org:meta",
+    "status": "developing",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "developing",
+        "at": "2026-09-10T00:00:00.000Z",
+        "reason": "3 independent sources, from established outlets, speculative framing.",
+        "triggered_by": "corroboration"
+      }
+    ],
+    "confidence": {
+      "score": 70,
+      "band": "high",
+      "components": {
+        "corroboration": 26,
+        "source_tier": 26,
+        "llm_assessment": 11,
+        "consistency": 7
+      },
+      "rationale": "3 independent sources, from established outlets, speculative framing."
+    },
+    "corroboration_count": 3,
+    "sources": [
+      {
+        "url": "https://reuters.com/story/meta-reorganizes-its-superintelligence-g",
+        "canonical_url": "https://reuters.com/story/meta-reorganizes-its-superintelligence-g",
+        "domain": "reuters.com",
+        "outlet": "Reuters",
+        "tier": 2,
+        "title": "Meta reorganizes its superintelligence group under a new structure",
+        "published_at": "2026-09-09T21:36:00.000Z",
+        "discovered_at": "2026-09-10T00:00:00.000Z",
+        "excerpt": "Meta reorganized its AI research organization, consolidating several teams. Multiple researchers announced departures in the days following.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://reuters.com/"
+      },
+      {
+        "url": "https://theinformation.com/story/meta-reorganizes-its-superintelligence-g",
+        "canonical_url": "https://theinformation.com/story/meta-reorganizes-its-superintelligence-g",
+        "domain": "theinformation.com",
+        "outlet": "The Information",
+        "tier": 2,
+        "title": "Meta reorganizes its superintelligence group under a new structure",
+        "published_at": "2026-09-10T00:00:00.000Z",
+        "discovered_at": "2026-09-10T00:00:00.000Z",
+        "excerpt": "Meta reorganized its AI research organization, consolidating several teams. Multiple researchers announced departures in the days following.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://theinformation.com/"
+      },
+      {
+        "url": "https://businessinsider.com/story/meta-reorganizes-its-superintelligence-g",
+        "canonical_url": "https://businessinsider.com/story/meta-reorganizes-its-superintelligence-g",
+        "domain": "businessinsider.com",
+        "outlet": "Business Insider",
+        "tier": 3,
+        "title": "Meta reorganizes its superintelligence group under a new structure",
+        "published_at": "2026-09-09T22:48:00.000Z",
+        "discovered_at": "2026-09-10T00:00:00.000Z",
+        "excerpt": "Meta reorganized its AI research organization, consolidating several teams. Multiple researchers announced departures in the days following.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://businessinsider.com/"
+      }
+    ],
+    "source_count": 3,
+    "first_seen_at": "2026-09-10T00:00:00.000Z",
+    "updated_at": "2026-09-10T02:24:00.000Z",
+    "event_at": "2026-09-10T00:00:00.000Z",
+    "cluster": {
+      "doc_count": 9,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-10T00:00:00.000Z",
+      "flags": [
+        "speculative_language"
+      ]
+    },
+    "quality": {
+      "is_speculative": true,
+      "has_primary_source": false,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0011reports-sugg",
+    "schema_version": 2,
+    "type": "acquisition",
+    "secondary_types": [],
+    "title": "Reports suggest a mid-size inference startup is in acquisition talks",
+    "summary": "Two outlets report that an inference optimization startup is in acquisition discussions. Neither named the acquiring party.",
+    "why_it_matters": "Inference-layer consolidation would signal that serving efficiency is becoming a durable moat rather than a commodity.",
+    "entities": [
+      {
+        "id": "org:nvidia",
+        "name": "Nvidia",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "nvidia"
+      }
+    ],
+    "primary_entity_id": "org:nvidia",
+    "status": "developing",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "developing",
+        "at": "2026-09-09T09:36:00.000Z",
+        "reason": "2 independent sources, from established outlets, speculative framing.",
+        "triggered_by": "corroboration"
+      }
+    ],
+    "confidence": {
+      "score": 61,
+      "band": "high",
+      "components": {
+        "corroboration": 18,
+        "source_tier": 26,
+        "llm_assessment": 10,
+        "consistency": 7
+      },
+      "rationale": "2 independent sources, from established outlets, speculative framing."
+    },
+    "corroboration_count": 2,
+    "sources": [
+      {
+        "url": "https://theinformation.com/story/reports-suggest-a-mid-size-inference-sta",
+        "canonical_url": "https://theinformation.com/story/reports-suggest-a-mid-size-inference-sta",
+        "domain": "theinformation.com",
+        "outlet": "The Information",
+        "tier": 2,
+        "title": "Reports suggest a mid-size inference startup is in acquisition talks",
+        "published_at": "2026-09-09T08:24:00.000Z",
+        "discovered_at": "2026-09-09T09:36:00.000Z",
+        "excerpt": "Two outlets report that an inference optimization startup is in acquisition discussions. Neither named the acquiring party.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://theinformation.com/"
+      },
+      {
+        "url": "https://bloomberg.com/story/reports-suggest-a-mid-size-inference-sta",
+        "canonical_url": "https://bloomberg.com/story/reports-suggest-a-mid-size-inference-sta",
+        "domain": "bloomberg.com",
+        "outlet": "Bloomberg",
+        "tier": 2,
+        "title": "Reports suggest a mid-size inference startup is in acquisition talks",
+        "published_at": "2026-09-09T09:36:00.000Z",
+        "discovered_at": "2026-09-09T09:36:00.000Z",
+        "excerpt": "Two outlets report that an inference optimization startup is in acquisition discussions. Neither named the acquiring party.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://bloomberg.com/"
+      }
+    ],
+    "source_count": 2,
+    "first_seen_at": "2026-09-09T09:36:00.000Z",
+    "updated_at": "2026-09-09T12:00:00.000Z",
+    "event_at": "2026-09-09T09:36:00.000Z",
+    "cluster": {
+      "doc_count": 6,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-09T09:36:00.000Z",
+      "flags": [
+        "speculative_language"
+      ]
+    },
+    "quality": {
+      "is_speculative": true,
+      "has_primary_source": false,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0014pricing-move",
+    "schema_version": 2,
+    "type": "strategic_speculation",
+    "secondary_types": [],
+    "title": "Pricing moves across three labs point to a margin squeeze",
+    "summary": "Three labs adjusted API pricing within the same two-week window. All three reduced per-token costs for their mid-tier models.",
+    "why_it_matters": "Simultaneous price cuts at the mid tier usually indicate competition on volume rather than capability, which compresses margins industry-wide.",
+    "entities": [
+      {
+        "id": "org:openai",
+        "name": "OpenAI",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "openai"
+      },
+      {
+        "id": "org:anthropic",
+        "name": "Anthropic",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "anthropic"
+      },
+      {
+        "id": "org:google",
+        "name": "Google",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "google"
+      }
+    ],
+    "primary_entity_id": "org:openai",
+    "status": "developing",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "developing",
+        "at": "2026-09-08T07:12:00.000Z",
+        "reason": "3 independent sources, from established outlets, speculative framing.",
+        "triggered_by": "corroboration"
+      }
+    ],
+    "confidence": {
+      "score": 68,
+      "band": "high",
+      "components": {
+        "corroboration": 26,
+        "source_tier": 26,
+        "llm_assessment": 9,
+        "consistency": 7
+      },
+      "rationale": "3 independent sources, from established outlets, speculative framing."
+    },
+    "corroboration_count": 3,
+    "sources": [
+      {
+        "url": "https://arstechnica.com/story/pricing-moves-across-three-labs-point-to",
+        "canonical_url": "https://arstechnica.com/story/pricing-moves-across-three-labs-point-to",
+        "domain": "arstechnica.com",
+        "outlet": "Ars Technica",
+        "tier": 2,
+        "title": "Pricing moves across three labs point to a margin squeeze",
+        "published_at": "2026-09-08T06:00:00.000Z",
+        "discovered_at": "2026-09-08T07:12:00.000Z",
+        "excerpt": "Three labs adjusted API pricing within the same two-week window. All three reduced per-token costs for their mid-tier models.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://arstechnica.com/"
+      },
+      {
+        "url": "https://theinformation.com/story/pricing-moves-across-three-labs-point-to",
+        "canonical_url": "https://theinformation.com/story/pricing-moves-across-three-labs-point-to",
+        "domain": "theinformation.com",
+        "outlet": "The Information",
+        "tier": 2,
+        "title": "Pricing moves across three labs point to a margin squeeze",
+        "published_at": "2026-09-08T07:12:00.000Z",
+        "discovered_at": "2026-09-08T07:12:00.000Z",
+        "excerpt": "Three labs adjusted API pricing within the same two-week window. All three reduced per-token costs for their mid-tier models.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://theinformation.com/"
+      },
+      {
+        "url": "https://venturebeat.com/story/pricing-moves-across-three-labs-point-to",
+        "canonical_url": "https://venturebeat.com/story/pricing-moves-across-three-labs-point-to",
+        "domain": "venturebeat.com",
+        "outlet": "VentureBeat",
+        "tier": 3,
+        "title": "Pricing moves across three labs point to a margin squeeze",
+        "published_at": "2026-09-08T04:48:00.000Z",
+        "discovered_at": "2026-09-08T07:12:00.000Z",
+        "excerpt": "Three labs adjusted API pricing within the same two-week window. All three reduced per-token costs for their mid-tier models.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://venturebeat.com/"
+      }
+    ],
+    "source_count": 3,
+    "first_seen_at": "2026-09-08T07:12:00.000Z",
+    "updated_at": "2026-09-08T09:36:00.000Z",
+    "event_at": "2026-09-08T07:12:00.000Z",
+    "cluster": {
+      "doc_count": 9,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-08T07:12:00.000Z",
+      "flags": [
+        "speculative_language"
+      ]
+    },
+    "quality": {
+      "is_speculative": true,
+      "has_primary_source": false,
+      "contradiction_count": 0,
+      "hallucination_guard_passed": true
+    }
+  },
+  {
+    "id": "sig_0013claimed-brea",
+    "schema_version": 2,
+    "type": "security_incident",
+    "secondary_types": [],
+    "title": "Claimed breach at an AI infrastructure provider did not occur",
+    "summary": "A claimed data breach circulated on social media. The provider stated no breach occurred and the posted data matched a previously public dataset.",
+    "why_it_matters": "False breach claims are common and move quickly. The correction rarely travels as far as the original claim.",
+    "entities": [
+      {
+        "id": "org:nvidia",
+        "name": "Nvidia",
+        "kind": "org",
+        "role": "mentioned",
+        "slug": "nvidia"
+      }
+    ],
+    "primary_entity_id": "org:nvidia",
+    "status": "debunked",
+    "status_history": [
+      {
+        "from": "unverified",
+        "to": "debunked",
+        "at": "2026-09-07T02:24:00.000Z",
+        "reason": "2 independent sources, from established outlets, 2 contradicting reports.",
+        "triggered_by": "corroboration"
+      }
+    ],
+    "confidence": {
+      "score": 47,
+      "band": "moderate",
+      "components": {
+        "corroboration": 18,
+        "source_tier": 26,
+        "llm_assessment": 3,
+        "consistency": 0
+      },
+      "rationale": "2 independent sources, from established outlets, 2 contradicting reports."
+    },
+    "corroboration_count": 2,
+    "sources": [
+      {
+        "url": "https://arstechnica.com/story/claimed-breach-at-an-ai-infrastructure-p",
+        "canonical_url": "https://arstechnica.com/story/claimed-breach-at-an-ai-infrastructure-p",
+        "domain": "arstechnica.com",
+        "outlet": "Ars Technica",
+        "tier": 2,
+        "title": "Claimed breach at an AI infrastructure provider did not occur",
+        "published_at": "2026-09-07T01:12:00.000Z",
+        "discovered_at": "2026-09-07T02:24:00.000Z",
+        "excerpt": "A claimed data breach circulated on social media. The provider stated no breach occurred and the posted data matched a previously public dataset.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://arstechnica.com/"
+      },
+      {
+        "url": "https://bleepingcomputer.com/story/claimed-breach-at-an-ai-infrastructure-p",
+        "canonical_url": "https://bleepingcomputer.com/story/claimed-breach-at-an-ai-infrastructure-p",
+        "domain": "bleepingcomputer.com",
+        "outlet": "BleepingComputer",
+        "tier": 3,
+        "title": "Claimed breach at an AI infrastructure provider did not occur",
+        "published_at": "2026-09-07T02:24:00.000Z",
+        "discovered_at": "2026-09-07T02:24:00.000Z",
+        "excerpt": "A claimed data breach circulated on social media. The provider stated no breach occurred and the posted data matched a previously public dataset.",
+        "is_primary": false,
+        "lang": "en",
+        "archive_url": "https://web.archive.org/web/2026/https://bleepingcomputer.com/"
+      }
+    ],
+    "source_count": 2,
+    "first_seen_at": "2026-09-07T02:24:00.000Z",
+    "updated_at": "2026-09-07T04:48:00.000Z",
+    "event_at": "2026-09-07T02:24:00.000Z",
+    "cluster": {
+      "doc_count": 6,
+      "centroid_version": 1,
+      "merged_from": []
+    },
+    "extraction": {
+      "model": "seed:hand-authored",
+      "prompt_version": "v1",
+      "extracted_at": "2026-09-07T02:24:00.000Z",
+      "flags": [
+        "contradiction"
+      ]
+    },
+    "quality": {
+      "is_speculative": false,
+      "has_primary_source": false,
+      "contradiction_count": 2,
+      "hallucination_guard_passed": true
+    }
+  }
+]

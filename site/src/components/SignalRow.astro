@@ -1,0 +1,220 @@
+---
+/**
+ * A ledger entry.
+ *
+ * The left rule is the design's one bold idea: its filled length IS the
+ * confidence score, so certainty is legible before a single word is read.
+ * Everything else on the row stays deliberately quiet.
+ */
+import {
+  bandColor, statusColor, STATUS_LABELS, relativeTime,
+  SIGNAL_TYPE_LABELS, type FeedEntry,
+} from '../lib/display.ts';
+
+interface Props {
+  entry: FeedEntry;
+  /** Entity pages already state their subject; don't repeat it on every row. */
+  hideEntity?: string;
+}
+
+const { entry, hideEntity } = Astro.props;
+const shown = entry.entities
+  .filter((e) => e.id !== hideEntity)
+  .slice(0, 3);
+const extraSources = entry.source_count - entry.top_sources.length;
+---
+
+<article class="row">
+  <div class="gauge" aria-hidden="true">
+    <div class="gauge-fill" style={`height:${entry.confidence_score}%;background:${bandColor(entry.confidence_band)}`}></div>
+  </div>
+
+  <div class="body">
+    <div class="head">
+      <span class="kind" style={`--dot:${statusColor(entry.status)}`}>
+        <span class="kind-dot"></span>
+        {SIGNAL_TYPE_LABELS[entry.type]}
+      </span>
+      {entry.status !== 'confirmed' && (
+        <span class="status" style={`color:${statusColor(entry.status)}`}>
+          {STATUS_LABELS[entry.status]}
+        </span>
+      )}
+      <time class="when" datetime={entry.updated_at}>{relativeTime(entry.updated_at)}</time>
+    </div>
+
+    <h2 class="title">
+      <a href={`/signal/${entry.id}`}>{entry.title}</a>
+    </h2>
+
+    <p class="summary">{entry.summary}</p>
+
+    <div class="foot">
+      <span class="sources">
+        {entry.top_sources.map((s) => (
+          <span class="domain">{s.domain}</span>
+        ))}
+        {extraSources > 0 && <span class="more">+{extraSources}</span>}
+      </span>
+
+      {shown.length > 0 && (
+        <span class="entities">
+          {shown.map((e) => (
+            <a class="entity" href={`/entity/${e.slug}`}>{e.name}</a>
+          ))}
+        </span>
+      )}
+    </div>
+  </div>
+
+  <div class="score">
+    <span class="score-num" style={`color:${bandColor(entry.confidence_band)}`}>
+      {entry.confidence_score}
+    </span>
+    <span class="score-sub">
+      {entry.corroboration_count} {entry.corroboration_count === 1 ? 'source' : 'sources'}
+    </span>
+  </div>
+</article>
+
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 6px 1fr auto;
+    gap: var(--gap-4);
+    padding-block: var(--gap-4);
+    border-bottom: var(--rule);
+    align-items: start;
+  }
+
+  /* The confidence rule. Length encodes the score; it is the page's spine.
+     Weighted enough to read as an encoding rather than a divider. */
+  .gauge {
+    height: 100%;
+    min-height: 4.5rem;
+    background: var(--paper-edge);
+    position: relative;
+    align-self: stretch;
+  }
+  .gauge-fill {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+
+  .body { min-width: 0; }
+
+  .head {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-3);
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    margin-bottom: var(--gap-2);
+  }
+
+  .kind {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--slate-soft);
+    font-weight: 500;
+  }
+  .kind-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--dot);
+  }
+
+  .status { font-weight: 500; }
+
+  .when { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+  .title {
+    font-family: var(--serif);
+    font-size: var(--t-lg);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--gap-2);
+    max-width: 34ch;
+  }
+  .title a {
+    text-decoration: none;
+    background-image: linear-gradient(var(--ink), var(--ink));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.25s ease;
+  }
+  .title a:hover { background-size: 100% 1px; }
+
+  .summary {
+    margin: 0 0 var(--gap-3);
+    color: var(--slate-soft);
+    font-size: var(--t-base);
+    line-height: 1.55;
+    max-width: 62ch;
+  }
+
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-3);
+    align-items: baseline;
+    font-size: var(--t-xs);
+  }
+
+  .sources { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+
+  /* Monospace earns its place here only: fixed width aids domain scanning. */
+  .domain {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--slate-faint);
+  }
+  .more { font-family: var(--mono); font-size: 0.7rem; color: var(--slate-faint); }
+
+  .entities { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-left: auto; }
+  .entity {
+    color: var(--slate-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--paper-edge);
+    transition: border-color 0.15s;
+  }
+  .entity:hover { border-bottom-color: var(--slate-soft); }
+
+  .score {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 4.5rem;
+  }
+  .score-num {
+    font-family: var(--serif);
+    font-size: var(--t-xl);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .score-sub {
+    font-size: 0.7rem;
+    color: var(--slate-faint);
+    margin-top: 0.3rem;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .row { grid-template-columns: 3px 1fr; gap: var(--gap-3); }
+    .score {
+      grid-column: 2;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.5rem;
+      min-width: 0;
+      margin-top: var(--gap-2);
+    }
+    .score-num { font-size: var(--t-lg); }
+    .title { font-size: var(--t-md); max-width: none; }
+    .entities { margin-left: 0; }
+  }
+</style>

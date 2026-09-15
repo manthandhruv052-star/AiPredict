@@ -1,0 +1,200 @@
+---
+import '../styles/tokens.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Structured intelligence on what is actually happening in AI.' } = Astro.props;
+const meta = await import('../data/meta.json');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to signals</a>
+
+    <header class="masthead">
+      <div class="shell masthead-inner">
+        <a class="wordmark" href="/">
+          <span class="wordmark-mark" aria-hidden="true"></span>
+          <span class="wordmark-text">Signal Index</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="/">Feed</a>
+          <a href="/entities">Entities</a>
+          <a href="/method">Method</a>
+        </nav>
+
+        <p class="pulse">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>{meta.default.signal_count} signals tracked</span>
+        </p>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-inner">
+        <p class="footer-claim">
+          Every claim on this site links to the source it came from. Nothing is
+          published that could not be traced back to a document we read.
+        </p>
+        <p class="footer-meta">
+          Last pass {new Date(meta.default.generated_at).toLocaleString('en-US', {
+            month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
+          })} UTC · <a href="/method">How confidence is scored</a>
+        </p>
+      </div>
+    </footer>
+
+    <style>
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--ink);
+        color: var(--paper);
+        padding: 0.75rem 1.25rem;
+        z-index: 100;
+        text-decoration: none;
+      }
+      .skip:focus { left: 0; }
+
+      .masthead {
+        border-bottom: var(--rule);
+        position: sticky;
+        top: 0;
+        background: color-mix(in srgb, var(--paper) 88%, transparent);
+        backdrop-filter: blur(12px);
+        z-index: 20;
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+
+      .masthead-inner {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-5);
+        min-height: 4.25rem;
+      }
+
+      .wordmark {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        text-decoration: none;
+        margin-right: auto;
+      }
+
+      /* The mark is the product's thesis in miniature: a confidence rule. */
+      .wordmark-mark {
+        width: 3px;
+        height: 1.15rem;
+        background: linear-gradient(
+          to bottom,
+          var(--verdigris) 0 60%,
+          var(--brass) 60% 85%,
+          var(--graphite) 85% 100%
+        );
+        transform: translateY(0.1rem);
+      }
+
+      .wordmark-text {
+        font-family: var(--serif);
+        font-size: 1.5rem;
+        letter-spacing: -0.015em;
+      }
+
+      .nav {
+        display: flex;
+        gap: var(--gap-4);
+        font-size: var(--t-sm);
+        color: var(--slate-soft);
+      }
+      .nav a {
+        text-decoration: none;
+        padding-bottom: 2px;
+        border-bottom: 1px solid transparent;
+        transition: color 0.15s, border-color 0.15s;
+      }
+      .nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+      .pulse {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+        font-size: var(--t-xs);
+        color: var(--slate-faint);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .pulse-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--verdigris);
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--verdigris) 60%, transparent);
+        animation: breathe 3.5s ease-in-out infinite;
+      }
+
+      /* The single ambient motion on the site: it signals "this is live". */
+      @keyframes breathe {
+        0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--verdigris) 55%, transparent); }
+        50%      { box-shadow: 0 0 0 5px color-mix(in srgb, var(--verdigris) 0%, transparent); }
+      }
+
+      .footer {
+        margin-top: var(--gap-7);
+        border-top: var(--rule);
+        padding-block: var(--gap-5);
+        padding-bottom: calc(var(--gap-5) + env(safe-area-inset-bottom, 0px));
+        background: var(--paper-sunk);
+      }
+
+      .footer-claim {
+        font-family: var(--serif);
+        font-size: var(--t-md);
+        max-width: 46ch;
+        margin: 0 0 var(--gap-3);
+        line-height: 1.5;
+      }
+
+      .footer-meta {
+        margin: 0;
+        font-size: var(--t-xs);
+        color: var(--slate-faint);
+      }
+      .footer-meta a { color: var(--slate-soft); }
+
+      @media (max-width: 640px) {
+        .masthead-inner {
+          gap: var(--gap-3);
+          flex-wrap: wrap;
+          min-height: 0;
+          padding-block: 0.75rem;
+        }
+        .wordmark { margin-right: 0; flex: 1 1 auto; }
+        .wordmark-text { font-size: 1.25rem; }
+        .nav { gap: var(--gap-3); font-size: var(--t-xs); }
+        .pulse { flex-basis: 100%; order: 3; }
+      }
+    </style>
+  </body>
+</html>

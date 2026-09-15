@@ -1,0 +1,205 @@
+[
+  {
+    "id": "org:nvidia",
+    "name": "Nvidia",
+    "kind": "org",
+    "slug": "nvidia",
+    "aliases": [],
+    "signal_count": 4,
+    "type_breakdown": {
+      "funding": 1,
+      "infrastructure": 1,
+      "acquisition": 1,
+      "security_incident": 1
+    },
+    "first_seen_at": "2026-09-07T02:24:00.000Z",
+    "last_seen_at": "2026-09-14T12:00:00.000Z"
+  },
+  {
+    "id": "org:openai",
+    "name": "OpenAI",
+    "kind": "org",
+    "slug": "openai",
+    "aliases": [],
+    "signal_count": 3,
+    "type_breakdown": {
+      "rumor": 1,
+      "ai_cyberattack": 1,
+      "strategic_speculation": 1
+    },
+    "first_seen_at": "2026-09-08T07:12:00.000Z",
+    "last_seen_at": "2026-09-15T02:24:00.000Z"
+  },
+  {
+    "id": "org:anthropic",
+    "name": "Anthropic",
+    "kind": "org",
+    "slug": "anthropic",
+    "aliases": [],
+    "signal_count": 3,
+    "type_breakdown": {
+      "leak": 1,
+      "ai_cyberattack": 1,
+      "strategic_speculation": 1
+    },
+    "first_seen_at": "2026-09-08T07:12:00.000Z",
+    "last_seen_at": "2026-09-14T19:12:00.000Z"
+  },
+  {
+    "id": "org:google",
+    "name": "Google",
+    "kind": "org",
+    "slug": "google",
+    "aliases": [],
+    "signal_count": 2,
+    "type_breakdown": {
+      "research_breakthrough": 1,
+      "strategic_speculation": 1
+    },
+    "first_seen_at": "2026-09-08T07:12:00.000Z",
+    "last_seen_at": "2026-09-12T14:24:00.000Z"
+  },
+  {
+    "id": "org:mistral-ai",
+    "name": "Mistral AI",
+    "kind": "org",
+    "slug": "mistral-ai",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "model_release": 1
+    },
+    "first_seen_at": "2026-09-15T07:12:00.000Z",
+    "last_seen_at": "2026-09-15T09:36:00.000Z"
+  },
+  {
+    "id": "model:large-3",
+    "name": "Large 3",
+    "kind": "model",
+    "slug": "large-3",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "model_release": 1
+    },
+    "first_seen_at": "2026-09-15T07:12:00.000Z",
+    "last_seen_at": "2026-09-15T09:36:00.000Z"
+  },
+  {
+    "id": "org:microsoft",
+    "name": "Microsoft",
+    "kind": "org",
+    "slug": "microsoft",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "model_release": 1
+    },
+    "first_seen_at": "2026-09-15T07:12:00.000Z",
+    "last_seen_at": "2026-09-15T09:36:00.000Z"
+  },
+  {
+    "id": "person:sam-altman",
+    "name": "Sam Altman",
+    "kind": "person",
+    "slug": "sam-altman",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "rumor": 1
+    },
+    "first_seen_at": "2026-09-15T00:00:00.000Z",
+    "last_seen_at": "2026-09-15T02:24:00.000Z"
+  },
+  {
+    "id": "org:cerebras",
+    "name": "Cerebras",
+    "kind": "org",
+    "slug": "cerebras",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "funding": 1
+    },
+    "first_seen_at": "2026-09-14T09:36:00.000Z",
+    "last_seen_at": "2026-09-14T12:00:00.000Z"
+  },
+  {
+    "id": "repo:vllm",
+    "name": "vLLM",
+    "kind": "repo",
+    "slug": "vllm",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "open_source_dev": 1
+    },
+    "first_seen_at": "2026-09-13T16:48:00.000Z",
+    "last_seen_at": "2026-09-13T19:12:00.000Z"
+  },
+  {
+    "id": "org:deepmind",
+    "name": "DeepMind",
+    "kind": "org",
+    "slug": "deepmind",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "research_breakthrough": 1
+    },
+    "first_seen_at": "2026-09-12T12:00:00.000Z",
+    "last_seen_at": "2026-09-12T14:24:00.000Z"
+  },
+  {
+    "id": "org:hugging-face",
+    "name": "Hugging Face",
+    "kind": "org",
+    "slug": "hugging-face",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "product_release": 1
+    },
+    "first_seen_at": "2026-09-11T19:12:00.000Z",
+    "last_seen_at": "2026-09-11T21:36:00.000Z"
+  },
+  {
+    "id": "org:european-union",
+    "name": "European Union",
+    "kind": "org",
+    "slug": "european-union",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "regulatory": 1
+    },
+    "first_seen_at": "2026-09-11T07:12:00.000Z",
+    "last_seen_at": "2026-09-11T09:36:00.000Z"
+  },
+  {
+    "id": "regulation:eu-ai-act",
+    "name": "EU AI Act",
+    "kind": "regulation",
+    "slug": "eu-ai-act",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "regulatory": 1
+    },
+    "first_seen_at": "2026-09-11T07:12:00.000Z",
+    "last_seen_at": "2026-09-11T09:36:00.000Z"
+  },
+  {
+    "id": "org:meta",
+    "name": "Meta",
+    "kind": "org",
+    "slug": "meta",
+    "aliases": [],
+    "signal_count": 1,
+    "type_breakdown": {
+      "hiring": 1
+    },
+    "first_seen_at": "2026-09-10T00:00:00.000Z",
+    "last_seen_at": "2026-09-10T02:24:00.000Z"
+  }
+]

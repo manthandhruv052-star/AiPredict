@@ -1,0 +1,399 @@
+---
+import Base from '../layouts/Base.astro';
+import SignalRow from '../components/SignalRow.astro';
+import feedData from '../data/feed.json';
+import { groupByDay, bandColor, SIGNAL_TYPE_LABELS, type FeedEntry } from '../lib/display.ts';
+
+const feed = feedData as FeedEntry[];
+
+// Debunked signals stay reachable by permalink but leave the default feed —
+// showing them alongside live intelligence would misrepresent the record.
+const live = feed.filter((e) => e.status !== 'debunked' && e.status !== 'stale');
+const days = groupByDay(live);
+
+const lead = live[0];
+const rest = days
+  .map((d) => ({ ...d, entries: d.entries.filter((e) => e.id !== lead?.id) }))
+  .filter((d) => d.entries.length > 0);
+
+const corroborated = live.filter((e) => e.corroboration_count >= 3).length;
+const primarySourced = live.filter((e) =>
+  e.top_sources.some((s) => s.tier === 1)).length;
+
+// Ascending, so the hero plot reads as a distribution rather than a bar chart.
+const spectrum = [...live].sort((a, b) => a.confidence_score - b.confidence_score);
+
+// Only categories with enough volume to be worth scanning; a list of fourteen
+// rows all reading "1" is noise pretending to be information.
+const typeCounts = live.reduce<Record<string, number>>((acc, e) => {
+  acc[e.type] = (acc[e.type] ?? 0) + 1; return acc;
+}, {});
+const topTypes = Object.entries(typeCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 6);
+---
+
+<Base title="Signal Index — what is actually happening in AI">
+  <section class="opener">
+    <div class="shell opener-grid">
+      <div class="opener-text">
+        <h1 class="thesis">
+          Fifty outlets report one rumor.<br />
+          This shows you <em>one signal</em>, and how far to trust it.
+        </h1>
+
+        <div class="ledger-legend">
+          <span class="legend-item"><i style="background:var(--verdigris)"></i>Confirmed by a primary source</span>
+          <span class="legend-item"><i style="background:var(--brass)"></i>Partially corroborated</span>
+          <span class="legend-item"><i style="background:var(--graphite)"></i>Single source, unverified</span>
+        </div>
+      </div>
+
+      {/* The spectrum is the argument: every live signal plotted by how well
+          attested it is. It is the hero because it IS the product. */}
+      <figure class="spectrum">
+        <figcaption class="spectrum-cap">Every live signal, by confidence</figcaption>
+        <div class="spectrum-plot">
+          {spectrum.map((e) => (
+            <a
+              class="tick"
+              href={`/signal/${e.id}`}
+              style={`--h:${e.confidence_score}%;--c:${bandColor(e.confidence_band)}`}
+              title={`${e.title} — ${e.confidence_score}`}
+            ><span class="sr-only">{e.title}, confidence {e.confidence_score}</span></a>
+          ))}
+        </div>
+        <div class="spectrum-axis">
+          <span>thinly sourced</span>
+          <span>confirmed</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  {lead && (
+    <section class="lead-wrap">
+      <div class="shell">
+        <div class="lead">
+          <div class="lead-rule" aria-hidden="true">
+            <div class="lead-fill" style={`height:${lead.confidence_score}%`}></div>
+          </div>
+          <div class="lead-body">
+            <p class="lead-eyebrow">{SIGNAL_TYPE_LABELS[lead.type]}</p>
+            <h2 class="lead-title"><a href={`/signal/${lead.id}`}>{lead.title}</a></h2>
+            <p class="lead-summary">{lead.summary}</p>
+            <p class="lead-meta">
+              {lead.corroboration_count} independent sources ·
+              confidence {lead.confidence_score} of 100
+            </p>
+          </div>
+
+          <div class="lead-evidence">
+            <p class="lead-evidence-head">Who reported it</p>
+            <ul>
+              {lead.top_sources.map((s) => (
+                <li>
+                  <span class="lead-domain">{s.domain}</span>
+                  {s.tier === 1 && <span class="lead-primary">primary</span>}
+                </li>
+              ))}
+              {lead.source_count > lead.top_sources.length && (
+                <li class="lead-rest">
+                  and {lead.source_count - lead.top_sources.length} more
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="feed-wrap">
+    <div class="shell feed-grid">
+      <div class="feed">
+        {rest.map((day) => (
+          <div class="day">
+            <h3 class="day-label">{day.label}</h3>
+            {day.entries.map((entry) => <SignalRow entry={entry} />)}
+          </div>
+        ))}
+      </div>
+
+      <aside class="rail">
+        <div class="rail-block">
+          <h3 class="rail-head">The record right now</h3>
+          <dl class="stats">
+            <div><dt>Signals live</dt><dd>{live.length}</dd></div>
+            <div><dt>Corroborated by 3+</dt><dd>{corroborated}</dd></div>
+            <div><dt>Primary sourced</dt><dd>{primarySourced}</dd></div>
+          </dl>
+        </div>
+
+        <div class="rail-block">
+          <h3 class="rail-head">Most active categories</h3>
+          <ul class="cats">
+            {topTypes.map(([t, n]) => (
+              <li>
+                <span>{SIGNAL_TYPE_LABELS[t as keyof typeof SIGNAL_TYPE_LABELS]}</span>
+                <span class="cats-n">{n}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p class="rail-note">
+          Confidence is computed from how many independent outlets carried a
+          claim and how close they sat to the source. A model's own judgment can
+          move it by at most 15 points. <a href="/method">See the method</a>
+        </p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .opener {
+    padding-block: var(--gap-6) var(--gap-5);
+    border-bottom: var(--rule);
+  }
+
+  .opener-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: var(--gap-6);
+    align-items: end;
+  }
+
+  .spectrum { margin: 0; }
+
+  .spectrum-cap {
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    margin-bottom: var(--gap-3);
+  }
+
+  .spectrum-plot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 4px;
+    height: 8.5rem;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  /* Each tick is one signal, height = confidence. Deliberately narrow: this
+     must still read as a distribution at several hundred signals. */
+  .tick {
+    flex: 1 1 4px;
+    max-width: 14px;
+    min-width: 3px;
+    height: var(--h);
+    background: var(--c);
+    opacity: 0.8;
+    transition: opacity 0.12s, transform 0.12s;
+    transform-origin: bottom;
+  }
+  .tick:hover, .tick:focus-visible {
+    opacity: 1;
+    transform: scaleX(1.5);
+  }
+
+  .spectrum-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--gap-2);
+    font-size: 0.7rem;
+    color: var(--slate-faint);
+  }
+
+  .thesis {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 5.2vw, var(--t-2xl));
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    margin: 0 0 var(--gap-5);
+    max-width: 19ch;
+  }
+  .thesis em {
+    font-style: italic;
+    /* The one place the accent color touches type: it is the product's claim. */
+    color: var(--verdigris);
+  }
+
+  .ledger-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-4);
+    font-size: var(--t-xs);
+    color: var(--slate-soft);
+  }
+  .legend-item { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .legend-item i { width: 3px; height: 0.85rem; display: inline-block; }
+
+  .lead-wrap {
+    padding-block: var(--gap-5);
+    border-bottom: var(--rule);
+    background: var(--paper-sunk);
+  }
+
+  .lead {
+    display: grid;
+    grid-template-columns: 6px minmax(0, 1fr) minmax(0, 15rem);
+    gap: var(--gap-4);
+    align-items: start;
+  }
+
+  .lead-evidence { padding-top: 1.7rem; }
+  .lead-evidence-head {
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    margin: 0 0 var(--gap-2);
+    padding-bottom: var(--gap-2);
+    border-bottom: var(--rule);
+  }
+  .lead-evidence ul { list-style: none; margin: 0; padding: 0; }
+  .lead-evidence li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--gap-2);
+    padding-block: 0.32rem;
+    font-size: var(--t-xs);
+  }
+  .lead-domain { font-family: var(--mono); font-size: 0.7rem; color: var(--slate-soft); }
+  .lead-primary { font-size: 0.65rem; color: var(--verdigris); }
+  .lead-rest { color: var(--slate-faint); }
+  .lead-rule {
+    position: relative;
+    background: var(--paper-edge);
+    min-height: 100%;
+  }
+  .lead-fill {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--verdigris);
+  }
+
+  .lead-eyebrow {
+    margin: 0 0 var(--gap-2);
+    font-size: var(--t-xs);
+    color: var(--slate-soft);
+  }
+
+  .lead-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.6vw, var(--t-xl));
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 var(--gap-3);
+    max-width: 26ch;
+  }
+  .lead-title a { text-decoration: none; }
+  .lead-title a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  .lead-summary {
+    margin: 0 0 var(--gap-3);
+    font-size: var(--t-md);
+    line-height: 1.55;
+    color: var(--slate);
+    max-width: 58ch;
+  }
+
+  .lead-meta {
+    margin: 0;
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .feed-wrap { padding-top: var(--gap-5); }
+
+  .feed-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 15rem;
+    gap: var(--gap-6);
+    align-items: start;
+  }
+
+  .day { margin-bottom: var(--gap-5); }
+
+  .day-label {
+    font-size: var(--t-xs);
+    font-weight: 500;
+    color: var(--slate-faint);
+    margin: 0 0 var(--gap-2);
+    padding-bottom: var(--gap-2);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .rail {
+    position: sticky;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-5);
+  }
+
+  .rail-head {
+    font-size: var(--t-xs);
+    font-weight: 500;
+    color: var(--slate-faint);
+    margin: 0 0 var(--gap-3);
+    padding-bottom: var(--gap-2);
+    border-bottom: var(--rule);
+  }
+
+  .stats { margin: 0; }
+  .stats div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--gap-3);
+    padding-block: 0.45rem;
+    border-bottom: 1px dotted var(--paper-edge);
+  }
+  .stats dt { font-size: var(--t-xs); color: var(--slate-soft); min-width: 0; }
+  .stats dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: var(--t-md);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cats { list-style: none; margin: 0; padding: 0; }
+  .cats li {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 0.35rem;
+    font-size: var(--t-xs);
+    color: var(--slate-soft);
+  }
+  .cats-n { font-variant-numeric: tabular-nums; color: var(--slate-faint); }
+
+  .rail-note {
+    font-size: var(--t-xs);
+    line-height: 1.5;
+    color: var(--slate-faint);
+    margin: 0;
+    padding-top: var(--gap-3);
+    border-top: var(--rule);
+  }
+  .rail-note a { color: var(--slate-soft); }
+
+  @media (max-width: 900px) {
+    .feed-grid { grid-template-columns: 1fr; gap: var(--gap-5); }
+    .rail { position: static; order: -1; }
+    .opener { padding-block: var(--gap-5) var(--gap-4); }
+    .opener-grid { grid-template-columns: 1fr; gap: var(--gap-5); }
+    .spectrum-plot { height: 6rem; gap: 2px; }
+    .tick { min-width: 2px; }
+    .thesis { margin-bottom: var(--gap-4); }
+    .lead { grid-template-columns: 6px minmax(0, 1fr); }
+    .lead-evidence { display: none; }
+    .lead-summary, .lead-title { max-width: none; }
+  }
+</style>

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+*.log
+.DS_Store
+
+# Dev-only debugging helpers, not part of the build
+site/measure.cjs
+site/shot.cjs

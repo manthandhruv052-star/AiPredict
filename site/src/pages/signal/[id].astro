@@ -1,0 +1,443 @@
+---
+import Base from '../../layouts/Base.astro';
+import signalsData from '../../data/signals.json';
+import {
+  bandColor, bandPhrase, statusColor, STATUS_LABELS, relativeTime,
+  tierLabel, SIGNAL_TYPE_LABELS,
+} from '../../lib/display.ts';
+import type { Signal } from '../../../../pipeline/schema.ts';
+
+export async function getStaticPaths() {
+  const signals = (await import('../../data/signals.json')).default as Signal[];
+  return signals.map((s) => ({ params: { id: s.id }, props: { signal: s } }));
+}
+
+const { signal } = Astro.props as { signal: Signal };
+const c = signal.confidence;
+
+// Ordered so the reader sees the largest contributor first.
+const components = [
+  { key: 'Independent corroboration', value: c.components.corroboration, max: 40 },
+  { key: 'Source proximity', value: c.components.source_tier, max: 35 },
+  { key: 'Internal consistency', value: c.components.consistency, max: 10 },
+  { key: 'Model judgment', value: c.components.llm_assessment, max: 15 },
+];
+
+const related = (signalsData as Signal[])
+  .filter((s) => s.id !== signal.id
+    && s.entities.some((e) => signal.entities.some((x) => x.id === e.id)))
+  .slice(0, 4);
+---
+
+<Base title={`${signal.title} — Signal Index`} description={signal.summary}>
+  <article class="signal">
+    <div class="shell">
+      <nav class="crumb"><a href="/">Feed</a> / {SIGNAL_TYPE_LABELS[signal.type]}</nav>
+
+      <header class="head">
+        <div class="head-meta">
+          <span class="status" style={`color:${statusColor(signal.status)}`}>
+            {STATUS_LABELS[signal.status]}
+          </span>
+          <time datetime={signal.first_seen_at}>
+            First seen {relativeTime(signal.first_seen_at)}
+          </time>
+        </div>
+
+        <h1>{signal.title}</h1>
+        <p class="summary">{signal.summary}</p>
+      </header>
+
+      {signal.status === 'debunked' && (
+        <p class="alert">
+          This claim was contradicted by a credible source. It stays published
+          so the correction is on the record.
+        </p>
+      )}
+
+      {!signal.quality.hallucination_guard_passed && (
+        <p class="alert">
+          This signal failed automated grounding checks and is shown for
+          inspection only.
+        </p>
+      )}
+
+      <div class="cols">
+        <div class="main">
+          <section class="analysis">
+            <h2 class="analysis-label">Analysis</h2>
+            <p class="analysis-body">{signal.why_it_matters}</p>
+            <p class="analysis-note">
+              Interpretation, not reporting. The evidence below is what we
+              actually have.
+            </p>
+          </section>
+
+          <section class="evidence">
+            <h2 class="sec-head">Evidence</h2>
+            <ol class="sources">
+              {signal.sources.map((s) => (
+                <li class="source">
+                  <div class="source-head">
+                    <a class="source-outlet" href={s.url} rel="noopener noreferrer nofollow" target="_blank">
+                      {s.outlet}
+                    </a>
+                    <span class="source-tier" data-tier={s.tier}>{tierLabel(s.tier)}</span>
+                    <time datetime={s.published_at}>{relativeTime(s.published_at)}</time>
+                  </div>
+                  <blockquote class="source-excerpt">{s.excerpt}</blockquote>
+                  <div class="source-foot">
+                    <span class="source-domain">{s.domain}</span>
+                    {s.archive_url && (
+                      <a href={s.archive_url} rel="noopener noreferrer nofollow" target="_blank">archived copy</a>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p class="evidence-note">
+              Excerpts are quoted verbatim from each source. They are never
+              generated or paraphrased.
+            </p>
+          </section>
+
+          {related.length > 0 && (
+            <section class="related">
+              <h2 class="sec-head">Related signals</h2>
+              <ul>
+                {related.map((r) => (
+                  <li>
+                    <a href={`/signal/${r.id}`}>{r.title}</a>
+                    <span class="related-score">{r.confidence.score}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+
+        <aside class="side">
+          <div class="conf">
+            <div class="conf-top">
+              <span class="conf-score" style={`color:${bandColor(c.band)}`}>{c.score}</span>
+              <span class="conf-of">of 100</span>
+            </div>
+            <p class="conf-phrase">{bandPhrase(c.band)}</p>
+            <p class="conf-rationale">{c.rationale}</p>
+
+            <div class="breakdown">
+              {components.map((comp) => (
+                <div class="comp">
+                  <div class="comp-head">
+                    <span>{comp.key}</span>
+                    <span class="comp-val">{comp.value}<span class="comp-max">/{comp.max}</span></span>
+                  </div>
+                  <div class="comp-bar">
+                    <div
+                      class="comp-fill"
+                      style={`width:${(comp.value / comp.max) * 100}%;background:${
+                        comp.key === 'Model judgment' ? 'var(--slate-faint)' : bandColor(c.band)
+                      }`}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p class="conf-cap">
+              Model judgment is capped at 15 points so a confident-sounding
+              model cannot make a thin story look solid.
+            </p>
+          </div>
+
+          <div class="side-block">
+            <h3 class="side-head">Entities</h3>
+            <ul class="ents">
+              {signal.entities.map((e) => (
+                <li>
+                  <a href={`/entity/${e.slug}`}>{e.name}</a>
+                  <span class="ent-role">{e.role}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="side-block">
+            <h3 class="side-head">Record</h3>
+            <ul class="history">
+              {signal.status_history.map((h) => (
+                <li>
+                  <span class="hist-to" style={`color:${statusColor(h.to)}`}>
+                    {STATUS_LABELS[h.to]}
+                  </span>
+                  <span class="hist-reason">{h.reason}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="cluster-note">
+              Drawn from {signal.cluster.doc_count} documents across
+              {' '}{signal.corroboration_count} independent sources.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .signal { padding-top: var(--gap-5); }
+
+  .crumb {
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    margin-bottom: var(--gap-4);
+  }
+  .crumb a { color: var(--slate-soft); }
+
+  .head { margin-bottom: var(--gap-5); }
+
+  .head-meta {
+    display: flex;
+    gap: var(--gap-3);
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    margin-bottom: var(--gap-3);
+  }
+  .status { font-weight: 500; }
+
+  .head h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--gap-3);
+    max-width: 24ch;
+  }
+
+  .summary {
+    font-size: var(--t-md);
+    line-height: 1.6;
+    color: var(--slate);
+    margin: 0;
+    max-width: 58ch;
+  }
+
+  .alert {
+    border-left: 3px solid var(--oxide);
+    background: color-mix(in srgb, var(--oxide) 7%, transparent);
+    padding: var(--gap-3) var(--gap-4);
+    margin-bottom: var(--gap-5);
+    font-size: var(--t-sm);
+    max-width: 58ch;
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: var(--gap-6);
+    align-items: start;
+    padding-bottom: var(--gap-6);
+  }
+
+  /* Analysis is visually quarantined from reporting — different ground,
+     different type, an explicit note. This boundary is a trust feature. */
+  .analysis {
+    background: var(--paper-sunk);
+    border-left: 3px solid var(--slate-faint);
+    padding: var(--gap-4);
+    margin-bottom: var(--gap-6);
+  }
+  .analysis-label {
+    font-size: var(--t-xs);
+    font-weight: 500;
+    color: var(--slate-faint);
+    margin: 0 0 var(--gap-2);
+  }
+  .analysis-body {
+    font-family: var(--serif);
+    font-size: var(--t-md);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0 0 var(--gap-2);
+    max-width: 52ch;
+  }
+  .analysis-note {
+    margin: 0;
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+  }
+
+  .sec-head {
+    font-size: var(--t-xs);
+    font-weight: 500;
+    color: var(--slate-faint);
+    margin: 0 0 var(--gap-3);
+    padding-bottom: var(--gap-2);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .sources { list-style: none; margin: 0; padding: 0; counter-reset: src; }
+
+  .source {
+    padding-block: var(--gap-4);
+    border-bottom: var(--rule);
+  }
+
+  .source-head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--gap-3);
+    margin-bottom: var(--gap-2);
+    font-size: var(--t-xs);
+    flex-wrap: wrap;
+  }
+  .source-outlet {
+    font-weight: 500;
+    font-size: var(--t-sm);
+    color: var(--ink);
+  }
+  .source-tier { color: var(--slate-faint); }
+  .source-tier[data-tier='1'] { color: var(--verdigris); }
+  .source-tier[data-tier='4'] { color: var(--oxide); }
+  .source-head time { margin-left: auto; color: var(--slate-faint); }
+
+  .source-excerpt {
+    margin: 0 0 var(--gap-2);
+    padding-left: var(--gap-3);
+    border-left: 2px solid var(--paper-edge);
+    font-size: var(--t-sm);
+    line-height: 1.55;
+    color: var(--slate-soft);
+    max-width: 62ch;
+  }
+
+  .source-foot {
+    display: flex;
+    gap: var(--gap-3);
+    font-size: 0.7rem;
+    color: var(--slate-faint);
+  }
+  .source-domain { font-family: var(--mono); }
+  .source-foot a { color: var(--slate-faint); }
+
+  .evidence-note {
+    margin: var(--gap-3) 0 0;
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+  }
+
+  .related { margin-top: var(--gap-6); }
+  .related ul { list-style: none; margin: 0; padding: 0; }
+  .related li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--gap-3);
+    padding-block: var(--gap-3);
+    border-bottom: var(--rule);
+    font-size: var(--t-sm);
+  }
+  .related a { text-decoration: none; }
+  .related a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .related-score {
+    font-variant-numeric: tabular-nums;
+    color: var(--slate-faint);
+    font-size: var(--t-xs);
+  }
+
+  .side {
+    position: sticky;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-5);
+  }
+
+  .conf {
+    border: var(--rule);
+    padding: var(--gap-4);
+    background: var(--paper-sunk);
+  }
+  .conf-top { display: flex; align-items: baseline; gap: 0.4rem; }
+  .conf-score {
+    font-family: var(--serif);
+    font-size: var(--t-2xl);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .conf-of { font-size: var(--t-xs); color: var(--slate-faint); }
+
+  .conf-phrase {
+    margin: var(--gap-2) 0 var(--gap-1);
+    font-size: var(--t-sm);
+    font-weight: 500;
+  }
+  .conf-rationale {
+    margin: 0 0 var(--gap-4);
+    font-size: var(--t-xs);
+    color: var(--slate-soft);
+    line-height: 1.5;
+  }
+
+  .breakdown { display: flex; flex-direction: column; gap: var(--gap-3); }
+  .comp-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--t-xs);
+    color: var(--slate-soft);
+    margin-bottom: 0.3rem;
+  }
+  .comp-val { font-variant-numeric: tabular-nums; }
+  .comp-max { color: var(--slate-faint); }
+  .comp-bar { height: 3px; background: var(--paper-edge); }
+  .comp-fill { height: 100%; }
+
+  .conf-cap {
+    margin: var(--gap-4) 0 0;
+    padding-top: var(--gap-3);
+    border-top: var(--rule);
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    line-height: 1.5;
+  }
+
+  .side-head {
+    font-size: var(--t-xs);
+    font-weight: 500;
+    color: var(--slate-faint);
+    margin: 0 0 var(--gap-3);
+    padding-bottom: var(--gap-2);
+    border-bottom: var(--rule);
+  }
+
+  .ents, .history { list-style: none; margin: 0; padding: 0; }
+  .ents li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-block: 0.4rem;
+    font-size: var(--t-sm);
+  }
+  .ent-role { font-size: 0.7rem; color: var(--slate-faint); }
+
+  .history li {
+    padding-block: 0.5rem;
+    border-bottom: 1px dotted var(--paper-edge);
+    font-size: var(--t-xs);
+  }
+  .hist-to { display: block; font-weight: 500; margin-bottom: 0.15rem; }
+  .hist-reason { color: var(--slate-faint); line-height: 1.45; }
+
+  .cluster-note {
+    margin: var(--gap-3) 0 0;
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .cols { grid-template-columns: 1fr; gap: var(--gap-5); }
+    .side { position: static; order: -1; }
+  }
+</style>

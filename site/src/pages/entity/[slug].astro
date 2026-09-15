@@ -1,0 +1,117 @@
+---
+import Base from '../../layouts/Base.astro';
+import SignalRow from '../../components/SignalRow.astro';
+import { SIGNAL_TYPE_LABELS, relativeTime, type FeedEntry } from '../../lib/display.ts';
+import type { Signal, EntityProfile } from '../../../../pipeline/schema.ts';
+
+export async function getStaticPaths() {
+  const entities = (await import('../../data/entities.json')).default as EntityProfile[];
+  const feed = (await import('../../data/feed.json')).default as FeedEntry[];
+
+  return entities.map((entity) => ({
+    params: { slug: entity.slug },
+    props: {
+      entity,
+      entries: feed.filter((f) => f.entities.some((e) => e.id === entity.id)),
+    },
+  }));
+}
+
+const { entity, entries } = Astro.props as {
+  entity: EntityProfile;
+  entries: FeedEntry[];
+};
+
+const breakdown = Object.entries(entity.type_breakdown)
+  .sort((a, b) => b[1] - a[1]);
+
+const KIND_NOUN: Record<string, string> = {
+  org: 'Organization', model: 'Model', person: 'Person', product: 'Product',
+  chip: 'Hardware', regulation: 'Regulation', repo: 'Repository',
+};
+---
+
+<Base
+  title={`${entity.name} — Signal Index`}
+  description={`Everything tracked about ${entity.name}: ${entity.signal_count} signals.`}
+>
+  <section class="profile">
+    <div class="shell">
+      <nav class="crumb"><a href="/entities">Entities</a> / {KIND_NOUN[entity.kind]}</nav>
+
+      <div class="profile-head">
+        <h1>{entity.name}</h1>
+        <p class="lede">
+          {entity.signal_count} signal{entity.signal_count === 1 ? '' : 's'} on
+          the record, most recently {relativeTime(entity.last_seen_at)}.
+        </p>
+      </div>
+
+      <div class="spread">
+        {breakdown.map(([type, n]) => (
+          <div class="spread-item">
+            <span class="spread-n">{n}</span>
+            <span class="spread-label">{SIGNAL_TYPE_LABELS[type as keyof typeof SIGNAL_TYPE_LABELS]}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <div class="shell">
+      <h2 class="sec-head">Everything tracked</h2>
+      {entries.map((entry) => <SignalRow entry={entry} hideEntity={entity.id} />)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .profile { padding-block: var(--gap-5); border-bottom: var(--rule); }
+
+  .crumb { font-size: var(--t-xs); color: var(--slate-faint); margin-bottom: var(--gap-4); }
+  .crumb a { color: var(--slate-soft); }
+
+  .profile-head h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.2rem, 6vw, var(--t-2xl));
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 0 0 var(--gap-2);
+  }
+
+  .lede {
+    margin: 0 0 var(--gap-5);
+    color: var(--slate-soft);
+    font-size: var(--t-md);
+    max-width: 50ch;
+  }
+
+  .spread {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-5);
+    padding-top: var(--gap-4);
+    border-top: var(--rule);
+  }
+  .spread-item { display: flex; flex-direction: column; gap: 0.15rem; }
+  .spread-n {
+    font-family: var(--serif);
+    font-size: var(--t-xl);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .spread-label { font-size: var(--t-xs); color: var(--slate-faint); }
+
+  .timeline { padding-top: var(--gap-5); }
+
+  .sec-head {
+    font-size: var(--t-xs);
+    font-weight: 500;
+    color: var(--slate-faint);
+    margin: 0 0 var(--gap-3);
+    padding-bottom: var(--gap-2);
+    border-bottom: 1px solid var(--ink);
+  }
+</style>

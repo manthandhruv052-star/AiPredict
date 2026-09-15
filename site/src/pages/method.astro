@@ -1,0 +1,217 @@
+---
+import Base from '../layouts/Base.astro';
+
+// The method page is the product's credibility argument. It is written to be
+// read by a sceptic, so it states limits as plainly as capabilities.
+const components = [
+  {
+    name: 'Independent corroboration',
+    max: 40,
+    body: 'How many genuinely separate outlets carried the claim. Outlets under common ownership count once — eight titles owned by the same publisher reflect one editorial decision, not eight confirmations.',
+  },
+  {
+    name: 'Source proximity',
+    max: 35,
+    body: 'How close the best source sits to the event. A company announcing its own model scores highest; an anonymous account reposting a screenshot scores lowest.',
+  },
+  {
+    name: 'Internal consistency',
+    max: 10,
+    body: 'Reduced when sources contradict each other, and when a claim is hedged without any primary source behind it.',
+  },
+  {
+    name: 'Model judgment',
+    max: 15,
+    body: 'The only component a language model controls. Capped deliberately: a fluent, confident-sounding model cannot push a thinly sourced rumor into the high band.',
+  },
+];
+---
+
+<Base title="Method — Signal Index">
+  <section class="head">
+    <div class="shell">
+      <h1>How we decide what to believe</h1>
+      <p class="lede">
+        This site publishes claims about unreleased products, security incidents,
+        and company strategy. Some of those claims are wrong. The method below
+        exists so you can tell which ones we are confident about, and why.
+      </p>
+    </div>
+  </section>
+
+  <div class="shell body">
+    <section class="block">
+      <h2>One story, one signal</h2>
+      <p>
+        When fifty outlets cover the same announcement, we collapse them into a
+        single entry carrying all fifty sources. Grouping is done on the entities
+        involved and the kind of event, so a launch, a lawsuit, and a price change
+        about the same model stay three separate signals rather than merging into
+        one.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Confidence is mostly arithmetic</h2>
+      <p>
+        Every signal carries a score from 0 to 100. Eighty-five of those points
+        come from countable facts about the sources. A model's own assessment can
+        move the score by at most fifteen.
+      </p>
+
+      <div class="components">
+        {components.map((c) => (
+          <div class="component">
+            <div class="component-head">
+              <h3>{c.name}</h3>
+              <span class="component-max">{c.max} points</span>
+            </div>
+            <div class="component-bar" aria-hidden="true">
+              <div class="component-fill" style={`width:${(c.max / 40) * 100}%`}></div>
+            </div>
+            <p>{c.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="worked">
+        In practice: a single anonymous post cannot exceed 35 even if the model
+        finds it entirely plausible. A company announcement carried by three
+        established outlets reaches about 90.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Nothing is published that we cannot trace</h2>
+      <p>
+        After a model writes a summary, every name, number, date, and quotation in
+        it is checked against the source text it was given. Anything that does not
+        appear in the sources fails the check and the signal is held back rather
+        than published. Source excerpts are always quoted verbatim — they are
+        never written or paraphrased by a model.
+      </p>
+      <p>
+        The one exception is the section marked <em>Analysis</em>, which is
+        interpretation rather than reporting. It is set apart visually on every
+        page for exactly that reason.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Rumors expire</h2>
+      <p>
+        A claim that attracts no corroboration within thirty days drops out of the
+        feed. Claims contradicted by a credible source are marked debunked and
+        stay published, because a correction that disappears is not a correction.
+      </p>
+    </section>
+
+    <section class="block limits">
+      <h2>What this does not do</h2>
+      <ul>
+        <li>It does not verify claims independently. It measures how well attested they already are.</li>
+        <li>A well-sourced claim can still be wrong. Outlets repeat each other's errors.</li>
+        <li>Grouping occasionally merges two stories that should be separate, or splits one that should be whole.</li>
+        <li>Coverage is limited to public sources. Anything that never surfaced publicly is invisible here.</li>
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .head { padding-block: var(--gap-6) var(--gap-5); border-bottom: var(--rule); }
+  .head h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 5.5vw, var(--t-2xl));
+    letter-spacing: -0.022em;
+    line-height: 1.08;
+    margin: 0 0 var(--gap-3);
+    max-width: 17ch;
+  }
+  .lede {
+    margin: 0;
+    color: var(--slate-soft);
+    font-size: var(--t-md);
+    line-height: 1.6;
+    max-width: 58ch;
+  }
+
+  .body { padding-top: var(--gap-6); padding-bottom: var(--gap-6); }
+
+  .block { margin-bottom: var(--gap-6); max-width: var(--measure); }
+
+  .block h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: var(--t-xl);
+    letter-spacing: -0.015em;
+    margin: 0 0 var(--gap-3);
+  }
+
+  .block p { margin: 0 0 var(--gap-3); line-height: 1.65; color: var(--slate); }
+  .block p:last-child { margin-bottom: 0; }
+  .block em { font-style: italic; }
+
+  .components {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-4);
+    margin-block: var(--gap-4);
+    padding-block: var(--gap-4);
+    border-block: var(--rule);
+  }
+
+  .component-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--gap-3);
+  }
+  .component h3 {
+    font-size: var(--t-base);
+    font-weight: 500;
+    margin: 0;
+  }
+  .component-max {
+    font-size: var(--t-xs);
+    color: var(--slate-faint);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .component-bar {
+    height: 3px;
+    background: var(--paper-edge);
+    margin-block: 0.5rem;
+  }
+  .component-fill { height: 100%; background: var(--verdigris); }
+  .component p {
+    margin: 0;
+    font-size: var(--t-sm);
+    color: var(--slate-soft);
+    line-height: 1.55;
+  }
+
+  .worked {
+    padding-left: var(--gap-3);
+    border-left: 2px solid var(--brass);
+    font-size: var(--t-sm);
+  }
+
+  .limits ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .limits li {
+    padding-block: var(--gap-3);
+    border-bottom: var(--rule);
+    color: var(--slate-soft);
+    line-height: 1.6;
+  }
+  .limits li::before {
+    content: '—';
+    color: var(--oxide);
+    margin-right: 0.6rem;
+  }
+</style>
