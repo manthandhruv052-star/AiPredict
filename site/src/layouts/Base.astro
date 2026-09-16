@@ -11,6 +11,11 @@ const meta = await import('../data/meta.json');
 
 const stamp = new Date(meta.default.generated_at)
   .toISOString().replace('T', ' ').slice(0, 16);
+
+const corpus = (meta.default as { corpus_documents?: number }).corpus_documents ?? 0;
+const corpusLabel = corpus >= 1000
+  ? `${Math.round(corpus / 1000)}K`
+  : String(corpus);
 ---
 
 <!doctype html>
@@ -46,7 +51,11 @@ const stamp = new Date(meta.default.generated_at)
 
         <div class="telemetry">
           <span class="tel">
-            <span class="tel-k">TRACKED</span>
+            <span class="tel-k">CORPUS</span>
+            <span class="tel-v num">{corpusLabel}</span>
+          </span>
+          <span class="tel">
+            <span class="tel-k">SIGNALS</span>
             <span class="tel-v num">{String(meta.default.signal_count).padStart(3, '0')}</span>
           </span>
           <span class="tel">
@@ -72,8 +81,9 @@ const stamp = new Date(meta.default.generated_at)
           that cannot be traced back to a document we read.
         </p>
         <p class="foot-meta num">
-          SCHEMA v{meta.default.schema_version} · {meta.default.signal_count} SIGNALS ·
-          {meta.default.entity_count} ENTITIES · <a href="/method">METHOD</a>
+          {corpusLabel} DOCUMENTS · {meta.default.signal_count} SIGNALS ·
+          {meta.default.entity_count} ENTITIES · SCHEMA v{meta.default.schema_version} ·
+          <a href="/method">METHOD</a>
         </p>
       </div>
     </footer>

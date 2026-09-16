@@ -1,0 +1,81 @@
+---
+/**
+ * Category strip.
+ *
+ * Every tracked category gets its own page. Counts come from the live data so
+ * an empty category is visibly empty rather than silently missing.
+ */
+import feedData from '../data/feed.json';
+import { SIGNAL_TYPE_LABELS, type FeedEntry } from '../lib/display.ts';
+import type { SignalType } from '../../../pipeline/schema.ts';
+
+interface Props {
+  /** Highlights the current category; omit on the main feed. */
+  active?: SignalType;
+}
+
+const { active } = Astro.props;
+const feed = feedData as FeedEntry[];
+
+const counts = feed.reduce<Record<string, number>>((acc, e) => {
+  acc[e.type] = (acc[e.type] ?? 0) + 1;
+  return acc;
+}, {});
+
+const cats = (Object.keys(SIGNAL_TYPE_LABELS) as SignalType[])
+  .map((t) => ({ type: t, label: SIGNAL_TYPE_LABELS[t], count: counts[t] ?? 0 }))
+  .filter((c) => c.count > 0)
+  .sort((a, b) => b.count - a.count);
+---
+
+<nav class="cats" aria-label="Categories">
+  <a class:list={['cat', { on: !active }]} href="/">
+    <span class="cat-l">All signals</span>
+    <span class="cat-n num">{feed.length}</span>
+  </a>
+  {cats.map((c) => (
+    <a class:list={['cat', { on: active === c.type }]} href={`/c/${c.type}`}>
+      <span class="cat-l">{c.label}</span>
+      <span class="cat-n num">{c.count}</span>
+    </a>
+  ))}
+</nav>
+
+<style>
+  .cats {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: var(--rule);
+    scrollbar-width: none;
+  }
+  .cats::-webkit-scrollbar { display: none; }
+
+  .cat {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    padding: 0.7rem 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    border-right: var(--rule);
+    border-bottom: 2px solid transparent;
+    transition: background 0.1s, border-color 0.1s, color 0.1s;
+  }
+  .cat:first-child { padding-left: 0; }
+  .cat:hover { background: var(--raised); color: var(--ember); }
+
+  .cat.on {
+    border-bottom-color: var(--ember);
+    color: var(--ember);
+  }
+
+  .cat-l { font-size: var(--t-sm); }
+  .cat-n { font-size: var(--t-2xs); color: var(--text-faint); }
+  .cat.on .cat-n { color: var(--ember); }
+
+  @media (max-width: 720px) {
+    .cat { padding: 0.6rem 0.7rem; }
+    .cat-l { font-size: var(--t-xs); }
+  }
+</style>

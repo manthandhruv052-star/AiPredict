@@ -1,0 +1,205 @@
+---
+import Base from '../../layouts/Base.astro';
+import SignalRow from '../../components/SignalRow.astro';
+import CategoryNav from '../../components/CategoryNav.astro';
+import {
+  groupByDay, bandColor, SIGNAL_TYPE_LABELS, type FeedEntry,
+} from '../../lib/display.ts';
+import type { SignalType } from '../../../../pipeline/schema.ts';
+
+/** One page per category that actually has signals. */
+export async function getStaticPaths() {
+  const feed = (await import('../../data/feed.json')).default as FeedEntry[];
+  const types = [...new Set(feed.map((e) => e.type))];
+  return types.map((type) => ({
+    params: { type },
+    props: { type, entries: feed.filter((e) => e.type === type) },
+  }));
+}
+
+const { type, entries } = Astro.props as { type: SignalType; entries: FeedEntry[] };
+
+const live = entries.filter((e) => e.status !== 'debunked' && e.status !== 'stale');
+const days = groupByDay(live);
+
+const verified = live.filter((e) => e.confidence_band === 'verified').length;
+const developing = live.filter((e) => e.status === 'developing').length;
+const mean = live.length
+  ? Math.round(live.reduce((a, e) => a + e.confidence_score, 0) / live.length)
+  : 0;
+
+// Capped for the same reason as the front page: too many ticks overflow.
+const PLOT_TICKS = 90;
+const sortedByConf = [...live].sort((a, b) => a.confidence_score - b.confidence_score);
+const spectrum = sortedByConf.length <= PLOT_TICKS
+  ? sortedByConf
+  : Array.from({ length: PLOT_TICKS }, (_, i) =>
+      sortedByConf[Math.round((i * (sortedByConf.length - 1)) / (PLOT_TICKS - 1))]);
+
+/** What this category is for, in the reader's terms rather than ours. */
+const BLURBS: Record<string, string> = {
+  model_release: 'Models that have actually shipped, with the announcement and the coverage that followed.',
+  product_release: 'Products, APIs and platform features that are now available.',
+  rumor: 'Claims about what is coming, scored by how well attested they are. Unconfirmed items expire after thirty days.',
+  leak: 'Non-public material surfaced without authorization. Treated as low confidence until corroborated.',
+  research_breakthrough: 'Papers and results, weighted toward work with reproducible claims.',
+  ai_cyberattack: 'AI used as an attack vector or as attacker tooling.',
+  security_incident: 'Breaches, vulnerabilities and disclosures affecting AI systems and the companies running them.',
+  open_source_dev: 'Releases and activity across the open-weight and serving ecosystem.',
+  funding: 'Rounds, valuations and the capital moving into the sector.',
+  acquisition: 'Deals closed and deals reported to be in progress.',
+  hiring: 'Team moves, departures and reorganizations that signal strategy shifts.',
+  infrastructure: 'Compute, datacenters, chips and the supply constraints behind them.',
+  regulatory: 'Rules, consultations and enforcement that change what labs can ship.',
+  strategic_speculation: 'Analysis of why companies are moving the way they are. Interpretation, not reporting.',
+};
+---
+
+<Base
+  title={`${SIGNAL_TYPE_LABELS[type]} — Signal Index`}
+  description={BLURBS[type] ?? `${SIGNAL_TYPE_LABELS[type]} signals.`}
+>
+  <div class="shell"><CategoryNav active={type} /></div>
+
+  <section class="head">
+    <div class="shell head-grid">
+      <div>
+        <p class="tag num caret">CATEGORY</p>
+        <h1>{SIGNAL_TYPE_LABELS[type]}</h1>
+        <p class="blurb">{BLURBS[type]}</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="s-v num">{String(live.length).padStart(2, '0')}</span>
+          <span class="s-k">TRACKED</span>
+        </div>
+        <div class="stat">
+          <span class="s-v num">{String(verified).padStart(2, '0')}</span>
+          <span class="s-k">VERIFIED</span>
+        </div>
+        <div class="stat">
+          <span class="s-v num">{String(developing).padStart(2, '0')}</span>
+          <span class="s-k">DEVELOPING</span>
+        </div>
+        <div class="stat">
+          <span class="s-v num">{mean}</span>
+          <span class="s-k">MEAN CONF</span>
+        </div>
+      </div>
+    </div>
+
+    {spectrum.length > 3 && (
+      <div class="shell">
+        <div class="plot" aria-hidden="true">
+          {spectrum.map((e) => (
+            <span class="tick" style={`--h:${e.confidence_score}%;--c:${bandColor(e.confidence_band)}`}></span>
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+
+  <section class="feed">
+    <div class="shell">
+      {days.map((day) => (
+        <div class="day">
+          <h2 class="day-label num caret">{day.label.toUpperCase()}</h2>
+          {day.entries.map((entry) => <SignalRow entry={entry} />)}
+        </div>
+      ))}
+
+      {live.length === 0 && (
+        <p class="empty">
+          Nothing tracked in this category yet. New signals appear here as
+          sources are ingested.
+        </p>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { border-bottom: var(--rule); background: var(--void); padding-block: var(--gap-5); }
+
+  .head-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--gap-5);
+    align-items: start;
+  }
+
+  .tag {
+    font-size: var(--t-2xs);
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    margin: 0 0 var(--gap-2);
+  }
+
+  .head h1 {
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 var(--gap-3);
+  }
+
+  .blurb {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: var(--t-sm);
+    line-height: 1.6;
+    max-width: 62ch;
+  }
+
+  .stats { display: flex; gap: var(--gap-5); }
+  .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .s-v { font-size: var(--t-xl); font-weight: 500; line-height: 1; }
+  .s-k {
+    font-family: var(--mono);
+    font-size: var(--t-2xs);
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+  }
+
+  .plot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2px;
+    height: 3rem;
+    margin-top: var(--gap-4);
+    border-bottom: 1px solid var(--line-bright);
+  }
+  .tick {
+    flex: 1 1 0;
+    max-width: 10px;
+    min-width: 0;
+    height: var(--h);
+    background: var(--c);
+    opacity: 0.8;
+  }
+
+  .feed { padding-top: var(--gap-5); }
+  .day { margin-bottom: var(--gap-5); }
+  .day-label {
+    font-size: var(--t-2xs);
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    margin: 0 0 var(--gap-2);
+    padding-bottom: var(--gap-2);
+    border-bottom: 1px solid var(--line-bright);
+  }
+
+  .empty {
+    color: var(--text-faint);
+    font-size: var(--t-sm);
+    padding-block: var(--gap-6);
+    max-width: 48ch;
+  }
+
+  @media (max-width: 860px) {
+    .head-grid { grid-template-columns: 1fr; }
+    .stats { flex-wrap: wrap; gap: var(--gap-4); }
+  }
+</style>

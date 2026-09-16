@@ -5,15 +5,21 @@
     "kind": "org",
     "slug": "nvidia",
     "aliases": [],
-    "signal_count": 4,
+    "signal_count": 26,
     "type_breakdown": {
-      "funding": 1,
-      "infrastructure": 1,
-      "acquisition": 1,
-      "security_incident": 1
+      "strategic_speculation": 1,
+      "funding": 2,
+      "leak": 1,
+      "infrastructure": 15,
+      "product_release": 1,
+      "acquisition": 2,
+      "security_incident": 1,
+      "hiring": 1,
+      "model_release": 1,
+      "rumor": 1
     },
-    "first_seen_at": "2026-09-07T02:24:00.000Z",
-    "last_seen_at": "2026-09-14T12:00:00.000Z"
+    "first_seen_at": "2026-05-23T18:28:23.652Z",
+    "last_seen_at": "2026-09-15T04:58:04.487Z"
   },
   {
     "id": "org:openai",
@@ -21,14 +27,21 @@
     "kind": "org",
     "slug": "openai",
     "aliases": [],
-    "signal_count": 3,
+    "signal_count": 22,
     "type_breakdown": {
-      "rumor": 1,
+      "acquisition": 1,
+      "funding": 3,
+      "rumor": 7,
       "ai_cyberattack": 1,
-      "strategic_speculation": 1
+      "product_release": 2,
+      "strategic_speculation": 2,
+      "hiring": 2,
+      "leak": 1,
+      "model_release": 2,
+      "infrastructure": 1
     },
-    "first_seen_at": "2026-09-08T07:12:00.000Z",
-    "last_seen_at": "2026-09-15T02:24:00.000Z"
+    "first_seen_at": "2026-05-19T02:50:48.182Z",
+    "last_seen_at": "2026-09-14T12:52:51.717Z"
   },
   {
     "id": "org:anthropic",
@@ -36,14 +49,42 @@
     "kind": "org",
     "slug": "anthropic",
     "aliases": [],
-    "signal_count": 3,
+    "signal_count": 17,
     "type_breakdown": {
-      "leak": 1,
+      "leak": 2,
       "ai_cyberattack": 1,
-      "strategic_speculation": 1
+      "rumor": 3,
+      "strategic_speculation": 2,
+      "hiring": 1,
+      "model_release": 2,
+      "funding": 3,
+      "product_release": 1,
+      "acquisition": 1,
+      "infrastructure": 1
     },
-    "first_seen_at": "2026-09-08T07:12:00.000Z",
+    "first_seen_at": "2026-06-14T08:36:40.057Z",
     "last_seen_at": "2026-09-14T19:12:00.000Z"
+  },
+  {
+    "id": "org:meta",
+    "name": "Meta",
+    "kind": "org",
+    "slug": "meta",
+    "aliases": [],
+    "signal_count": 17,
+    "type_breakdown": {
+      "strategic_speculation": 2,
+      "rumor": 4,
+      "hiring": 2,
+      "infrastructure": 1,
+      "leak": 2,
+      "product_release": 1,
+      "funding": 2,
+      "model_release": 2,
+      "acquisition": 1
+    },
+    "first_seen_at": "2026-05-20T01:04:04.354Z",
+    "last_seen_at": "2026-09-14T12:44:05.098Z"
   },
   {
     "id": "org:google",
@@ -51,39 +92,41 @@
     "kind": "org",
     "slug": "google",
     "aliases": [],
-    "signal_count": 2,
+    "signal_count": 16,
     "type_breakdown": {
+      "rumor": 5,
+      "acquisition": 1,
+      "leak": 2,
+      "hiring": 1,
       "research_breakthrough": 1,
-      "strategic_speculation": 1
+      "infrastructure": 2,
+      "strategic_speculation": 2,
+      "model_release": 2
     },
-    "first_seen_at": "2026-09-08T07:12:00.000Z",
-    "last_seen_at": "2026-09-12T14:24:00.000Z"
+    "first_seen_at": "2026-05-18T10:02:54.680Z",
+    "last_seen_at": "2026-09-15T10:48:00.000Z"
   },
   {
-    "id": "org:mistral-ai",
-    "name": "Mistral AI",
+    "id": "org:deepmind",
+    "name": "DeepMind",
     "kind": "org",
-    "slug": "mistral-ai",
+    "slug": "deepmind",
     "aliases": [],
-    "signal_count": 1,
+    "signal_count": 16,
     "type_breakdown": {
-      "model_release": 1
+      "rumor": 4,
+      "research_breakthrough": 1,
+      "funding": 3,
+      "infrastructure": 2,
+      "model_release": 1,
+      "product_release": 1,
+      "hiring": 1,
+      "strategic_speculation": 1,
+      "acquisition": 1,
+      "leak": 1
     },
-    "first_seen_at": "2026-09-15T07:12:00.000Z",
-    "last_seen_at": "2026-09-15T09:36:00.000Z"
-  },
-  {
-    "id": "model:large-3",
-    "name": "Large 3",
-    "kind": "model",
-    "slug": "large-3",
-    "aliases": [],
-    "signal_count": 1,
-    "type_breakdown": {
-      "model_release": 1
-    },
-    "first_seen_at": "2026-09-15T07:12:00.000Z",
-    "last_seen_at": "2026-09-15T09:36:00.000Z"
+    "first_seen_at": "2026-06-03T15:39:04.532Z",
+    "last_seen_at": "2026-09-15T10:48:00.000Z"
   },
   {
     "id": "org:microsoft",
@@ -91,12 +134,608 @@
     "kind": "org",
     "slug": "microsoft",
     "aliases": [],
-    "signal_count": 1,
+    "signal_count": 15,
     "type_breakdown": {
+      "model_release": 2,
+      "product_release": 2,
+      "hiring": 1,
+      "infrastructure": 2,
+      "rumor": 3,
+      "funding": 2,
+      "strategic_speculation": 1,
+      "acquisition": 1,
+      "leak": 1
+    },
+    "first_seen_at": "2026-05-29T13:32:08.937Z",
+    "last_seen_at": "2026-09-15T09:36:00.000Z"
+  },
+  {
+    "id": "org:mistral-ai",
+    "name": "Mistral AI",
+    "kind": "org",
+    "slug": "mistral-ai",
+    "aliases": [],
+    "signal_count": 13,
+    "type_breakdown": {
+      "model_release": 3,
+      "rumor": 2,
+      "leak": 2,
+      "strategic_speculation": 2,
+      "product_release": 1,
+      "acquisition": 1,
+      "hiring": 1,
+      "funding": 1
+    },
+    "first_seen_at": "2026-05-23T16:25:30.735Z",
+    "last_seen_at": "2026-09-15T09:36:00.000Z"
+  },
+  {
+    "id": "org:amazon",
+    "name": "Amazon",
+    "kind": "org",
+    "slug": "amazon",
+    "aliases": [],
+    "signal_count": 11,
+    "type_breakdown": {
+      "product_release": 1,
+      "infrastructure": 1,
+      "rumor": 4,
+      "funding": 1,
+      "hiring": 1,
+      "strategic_speculation": 1,
+      "leak": 1,
+      "acquisition": 1
+    },
+    "first_seen_at": "2026-06-23T16:31:35.136Z",
+    "last_seen_at": "2026-09-14T00:33:30.949Z"
+  },
+  {
+    "id": "repo:transformers",
+    "name": "Transformers",
+    "kind": "repo",
+    "slug": "transformers",
+    "aliases": [],
+    "signal_count": 11,
+    "type_breakdown": {
+      "open_source_dev": 10,
+      "security_incident": 1
+    },
+    "first_seen_at": "2026-05-23T05:52:55.186Z",
+    "last_seen_at": "2026-09-12T17:29:26.809Z"
+  },
+  {
+    "id": "repo:langchain",
+    "name": "LangChain",
+    "kind": "repo",
+    "slug": "langchain",
+    "aliases": [],
+    "signal_count": 11,
+    "type_breakdown": {
+      "open_source_dev": 10,
+      "security_incident": 1
+    },
+    "first_seen_at": "2026-05-26T10:53:42.037Z",
+    "last_seen_at": "2026-09-12T15:36:28.772Z"
+  },
+  {
+    "id": "org:ai21-labs",
+    "name": "AI21 Labs",
+    "kind": "org",
+    "slug": "ai21-labs",
+    "aliases": [],
+    "signal_count": 11,
+    "type_breakdown": {
+      "product_release": 1,
+      "acquisition": 1,
+      "rumor": 4,
+      "model_release": 1,
+      "strategic_speculation": 1,
+      "funding": 1,
+      "hiring": 1,
+      "infrastructure": 1
+    },
+    "first_seen_at": "2026-05-26T11:17:16.883Z",
+    "last_seen_at": "2026-09-02T04:46:16.673Z"
+  },
+  {
+    "id": "org:cohere",
+    "name": "Cohere",
+    "kind": "org",
+    "slug": "cohere",
+    "aliases": [],
+    "signal_count": 10,
+    "type_breakdown": {
+      "model_release": 2,
+      "hiring": 1,
+      "funding": 2,
+      "rumor": 2,
+      "leak": 1,
+      "product_release": 1,
+      "acquisition": 1
+    },
+    "first_seen_at": "2026-05-21T08:24:39.848Z",
+    "last_seen_at": "2026-09-15T01:17:16.195Z"
+  },
+  {
+    "id": "org:alibaba",
+    "name": "Alibaba",
+    "kind": "org",
+    "slug": "alibaba",
+    "aliases": [],
+    "signal_count": 9,
+    "type_breakdown": {
+      "strategic_speculation": 2,
+      "product_release": 1,
+      "model_release": 2,
+      "rumor": 2,
+      "acquisition": 1,
+      "infrastructure": 1
+    },
+    "first_seen_at": "2026-06-26T07:50:44.643Z",
+    "last_seen_at": "2026-09-15T06:00:03.319Z"
+  },
+  {
+    "id": "repo:sglang",
+    "name": "SGLang",
+    "kind": "repo",
+    "slug": "sglang",
+    "aliases": [],
+    "signal_count": 9,
+    "type_breakdown": {
+      "open_source_dev": 8,
+      "security_incident": 1
+    },
+    "first_seen_at": "2026-05-29T15:28:04.900Z",
+    "last_seen_at": "2026-09-15T03:50:58.049Z"
+  },
+  {
+    "id": "org:hugging-face",
+    "name": "Hugging Face",
+    "kind": "org",
+    "slug": "hugging-face",
+    "aliases": [],
+    "signal_count": 9,
+    "type_breakdown": {
+      "product_release": 2,
+      "model_release": 1,
+      "open_source_dev": 1,
+      "infrastructure": 1,
+      "funding": 1,
+      "hiring": 1,
+      "strategic_speculation": 1,
+      "acquisition": 1
+    },
+    "first_seen_at": "2026-05-28T12:19:33.500Z",
+    "last_seen_at": "2026-09-14T00:31:46.590Z"
+  },
+  {
+    "id": "org:xai",
+    "name": "xAI",
+    "kind": "org",
+    "slug": "xai",
+    "aliases": [],
+    "signal_count": 9,
+    "type_breakdown": {
+      "strategic_speculation": 1,
+      "model_release": 1,
+      "funding": 2,
+      "rumor": 2,
+      "leak": 1,
+      "hiring": 1,
+      "acquisition": 1
+    },
+    "first_seen_at": "2026-05-18T09:04:30.426Z",
+    "last_seen_at": "2026-09-13T10:48:28.671Z"
+  },
+  {
+    "id": "org:perplexity",
+    "name": "Perplexity",
+    "kind": "org",
+    "slug": "perplexity",
+    "aliases": [],
+    "signal_count": 8,
+    "type_breakdown": {
+      "strategic_speculation": 1,
+      "funding": 3,
+      "product_release": 1,
+      "infrastructure": 1,
+      "acquisition": 1,
+      "hiring": 1
+    },
+    "first_seen_at": "2026-06-08T17:22:19.565Z",
+    "last_seen_at": "2026-08-31T02:14:40.329Z"
+  },
+  {
+    "id": "model:gemini-4",
+    "name": "Gemini 4",
+    "kind": "model",
+    "slug": "gemini-4",
+    "aliases": [],
+    "signal_count": 6,
+    "type_breakdown": {
+      "rumor": 5,
       "model_release": 1
     },
-    "first_seen_at": "2026-09-15T07:12:00.000Z",
+    "first_seen_at": "2026-05-22T03:34:52.229Z",
+    "last_seen_at": "2026-09-15T10:48:00.000Z"
+  },
+  {
+    "id": "repo:vllm",
+    "name": "vLLM",
+    "kind": "repo",
+    "slug": "vllm",
+    "aliases": [],
+    "signal_count": 6,
+    "type_breakdown": {
+      "open_source_dev": 4,
+      "security_incident": 2
+    },
+    "first_seen_at": "2026-07-11T17:47:25.418Z",
+    "last_seen_at": "2026-09-13T19:12:00.000Z"
+  },
+  {
+    "id": "repo:ollama",
+    "name": "Ollama",
+    "kind": "repo",
+    "slug": "ollama",
+    "aliases": [],
+    "signal_count": 6,
+    "type_breakdown": {
+      "open_source_dev": 5,
+      "security_incident": 1
+    },
+    "first_seen_at": "2026-05-29T16:10:55.724Z",
+    "last_seen_at": "2026-09-11T01:30:12.604Z"
+  },
+  {
+    "id": "model:large-3",
+    "name": "Large 3",
+    "kind": "model",
+    "slug": "large-3",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "model_release": 2,
+      "rumor": 2,
+      "leak": 1
+    },
+    "first_seen_at": "2026-08-28T08:28:49.267Z",
     "last_seen_at": "2026-09-15T09:36:00.000Z"
+  },
+  {
+    "id": "org:groq",
+    "name": "Groq",
+    "kind": "org",
+    "slug": "groq",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "acquisition": 1,
+      "hiring": 1,
+      "strategic_speculation": 1,
+      "funding": 1,
+      "infrastructure": 1
+    },
+    "first_seen_at": "2026-05-23T18:28:23.652Z",
+    "last_seen_at": "2026-09-15T07:10:11.337Z"
+  },
+  {
+    "id": "repo:tensorrt-llm",
+    "name": "TensorRT-LLM",
+    "kind": "repo",
+    "slug": "tensorrt-llm",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "open_source_dev": 4,
+      "security_incident": 1
+    },
+    "first_seen_at": "2026-05-23T05:17:12.004Z",
+    "last_seen_at": "2026-09-14T20:18:16.977Z"
+  },
+  {
+    "id": "model:gemini-4-ultra",
+    "name": "Gemini 4 Ultra",
+    "kind": "model",
+    "slug": "gemini-4-ultra",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "rumor": 3,
+      "model_release": 1,
+      "leak": 1
+    },
+    "first_seen_at": "2026-06-03T15:39:04.532Z",
+    "last_seen_at": "2026-09-13T19:54:10.788Z"
+  },
+  {
+    "id": "model:phi-5",
+    "name": "Phi-5",
+    "kind": "model",
+    "slug": "phi-5",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "rumor": 3,
+      "model_release": 1,
+      "leak": 1
+    },
+    "first_seen_at": "2026-05-29T13:32:08.937Z",
+    "last_seen_at": "2026-09-10T13:12:01.361Z"
+  },
+  {
+    "id": "org:stability-ai",
+    "name": "Stability AI",
+    "kind": "org",
+    "slug": "stability-ai",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "infrastructure": 1,
+      "hiring": 1,
+      "product_release": 1,
+      "acquisition": 1,
+      "strategic_speculation": 1
+    },
+    "first_seen_at": "2026-05-31T13:07:44.981Z",
+    "last_seen_at": "2026-09-03T07:59:48.883Z"
+  },
+  {
+    "id": "model:llama-4-2",
+    "name": "Llama 4.2",
+    "kind": "model",
+    "slug": "llama-4-2",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "rumor": 3,
+      "model_release": 1,
+      "leak": 1
+    },
+    "first_seen_at": "2026-07-02T23:19:21.790Z",
+    "last_seen_at": "2026-09-01T12:54:01.622Z"
+  },
+  {
+    "id": "model:jamba-2",
+    "name": "Jamba 2",
+    "kind": "model",
+    "slug": "jamba-2",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "rumor": 4,
+      "model_release": 1
+    },
+    "first_seen_at": "2026-05-26T11:17:16.883Z",
+    "last_seen_at": "2026-08-24T20:13:24.560Z"
+  },
+  {
+    "id": "model:nova-2",
+    "name": "Nova 2",
+    "kind": "model",
+    "slug": "nova-2",
+    "aliases": [],
+    "signal_count": 5,
+    "type_breakdown": {
+      "rumor": 4,
+      "leak": 1
+    },
+    "first_seen_at": "2026-06-23T16:31:35.136Z",
+    "last_seen_at": "2026-08-13T06:00:55.482Z"
+  },
+  {
+    "id": "model:command-r3",
+    "name": "Command R3",
+    "kind": "model",
+    "slug": "command-r3",
+    "aliases": [],
+    "signal_count": 4,
+    "type_breakdown": {
+      "model_release": 1,
+      "rumor": 2,
+      "leak": 1
+    },
+    "first_seen_at": "2026-07-01T22:45:13.677Z",
+    "last_seen_at": "2026-09-15T01:17:16.195Z"
+  },
+  {
+    "id": "org:cerebras",
+    "name": "Cerebras",
+    "kind": "org",
+    "slug": "cerebras",
+    "aliases": [],
+    "signal_count": 4,
+    "type_breakdown": {
+      "funding": 2,
+      "acquisition": 1,
+      "hiring": 1
+    },
+    "first_seen_at": "2026-06-01T12:53:36.268Z",
+    "last_seen_at": "2026-09-14T12:00:00.000Z"
+  },
+  {
+    "id": "model:claude-haiku-4-5",
+    "name": "Claude Haiku 4.5",
+    "kind": "model",
+    "slug": "claude-haiku-4-5",
+    "aliases": [],
+    "signal_count": 4,
+    "type_breakdown": {
+      "rumor": 2,
+      "model_release": 1,
+      "leak": 1
+    },
+    "first_seen_at": "2026-06-30T12:09:09.388Z",
+    "last_seen_at": "2026-09-12T22:25:56.439Z"
+  },
+  {
+    "id": "model:grok-5",
+    "name": "Grok 5",
+    "kind": "model",
+    "slug": "grok-5",
+    "aliases": [],
+    "signal_count": 4,
+    "type_breakdown": {
+      "model_release": 1,
+      "rumor": 2,
+      "leak": 1
+    },
+    "first_seen_at": "2026-06-02T01:19:40.853Z",
+    "last_seen_at": "2026-09-12T16:21:58.879Z"
+  },
+  {
+    "id": "org:european-union",
+    "name": "European Union",
+    "kind": "org",
+    "slug": "european-union",
+    "aliases": [],
+    "signal_count": 4,
+    "type_breakdown": {
+      "funding": 1,
+      "regulatory": 3
+    },
+    "first_seen_at": "2026-06-27T05:37:43.222Z",
+    "last_seen_at": "2026-09-12T07:12:00.000Z"
+  },
+  {
+    "id": "model:gpt-5-turbo",
+    "name": "GPT-5 Turbo",
+    "kind": "model",
+    "slug": "gpt-5-turbo",
+    "aliases": [],
+    "signal_count": 4,
+    "type_breakdown": {
+      "rumor": 3,
+      "model_release": 1
+    },
+    "first_seen_at": "2026-06-19T04:14:11.980Z",
+    "last_seen_at": "2026-08-28T05:23:25.503Z"
+  },
+  {
+    "id": "model:nemotron-3",
+    "name": "Nemotron 3",
+    "kind": "model",
+    "slug": "nemotron-3",
+    "aliases": [],
+    "signal_count": 3,
+    "type_breakdown": {
+      "leak": 1,
+      "model_release": 1,
+      "rumor": 1
+    },
+    "first_seen_at": "2026-06-29T23:09:16.318Z",
+    "last_seen_at": "2026-09-13T10:31:32.562Z"
+  },
+  {
+    "id": "repo:llama-cpp",
+    "name": "llama.cpp",
+    "kind": "repo",
+    "slug": "llama-cpp",
+    "aliases": [],
+    "signal_count": 3,
+    "type_breakdown": {
+      "open_source_dev": 2,
+      "security_incident": 1
+    },
+    "first_seen_at": "2026-07-05T01:22:19.015Z",
+    "last_seen_at": "2026-09-12T21:36:00.000Z"
+  },
+  {
+    "id": "model:o4-mini",
+    "name": "o4-mini",
+    "kind": "model",
+    "slug": "o4-mini",
+    "aliases": [],
+    "signal_count": 3,
+    "type_breakdown": {
+      "rumor": 2,
+      "leak": 1
+    },
+    "first_seen_at": "2026-05-19T02:50:48.182Z",
+    "last_seen_at": "2026-09-05T08:05:59.740Z"
+  },
+  {
+    "id": "model:qwen-3-5",
+    "name": "Qwen 3.5",
+    "kind": "model",
+    "slug": "qwen-3-5",
+    "aliases": [],
+    "signal_count": 2,
+    "type_breakdown": {
+      "model_release": 1,
+      "rumor": 1
+    },
+    "first_seen_at": "2026-09-03T15:25:43.214Z",
+    "last_seen_at": "2026-09-13T21:36:00.000Z"
+  },
+  {
+    "id": "regulation:eu-ai-act",
+    "name": "EU AI Act",
+    "kind": "regulation",
+    "slug": "eu-ai-act",
+    "aliases": [],
+    "signal_count": 2,
+    "type_breakdown": {
+      "regulatory": 2
+    },
+    "first_seen_at": "2026-06-27T05:37:43.222Z",
+    "last_seen_at": "2026-09-11T09:36:00.000Z"
+  },
+  {
+    "id": "model:llama-5",
+    "name": "Llama 5",
+    "kind": "model",
+    "slug": "llama-5",
+    "aliases": [],
+    "signal_count": 2,
+    "type_breakdown": {
+      "leak": 1,
+      "model_release": 1
+    },
+    "first_seen_at": "2026-05-20T01:04:04.354Z",
+    "last_seen_at": "2026-08-30T16:48:33.216Z"
+  },
+  {
+    "id": "model:codestral-2",
+    "name": "Codestral 2",
+    "kind": "model",
+    "slug": "codestral-2",
+    "aliases": [],
+    "signal_count": 2,
+    "type_breakdown": {
+      "leak": 1,
+      "model_release": 1
+    },
+    "first_seen_at": "2026-07-15T17:37:25.816Z",
+    "last_seen_at": "2026-08-17T07:11:32.922Z"
+  },
+  {
+    "id": "model:gpt-5-5",
+    "name": "GPT-5.5",
+    "kind": "model",
+    "slug": "gpt-5-5",
+    "aliases": [],
+    "signal_count": 2,
+    "type_breakdown": {
+      "rumor": 1,
+      "model_release": 1
+    },
+    "first_seen_at": "2026-07-02T00:00:03.774Z",
+    "last_seen_at": "2026-08-12T23:25:47.696Z"
+  },
+  {
+    "id": "model:qwen-3-5-coder",
+    "name": "Qwen 3.5 Coder",
+    "kind": "model",
+    "slug": "qwen-3-5-coder",
+    "aliases": [],
+    "signal_count": 2,
+    "type_breakdown": {
+      "rumor": 1,
+      "model_release": 1
+    },
+    "first_seen_at": "2026-07-21T02:20:49.256Z",
+    "last_seen_at": "2026-07-31T02:48:40.003Z"
   },
   {
     "id": "person:sam-altman",
@@ -108,98 +747,59 @@
     "type_breakdown": {
       "rumor": 1
     },
-    "first_seen_at": "2026-09-15T00:00:00.000Z",
-    "last_seen_at": "2026-09-15T02:24:00.000Z"
+    "first_seen_at": "2026-09-14T02:24:00.000Z",
+    "last_seen_at": "2026-09-14T04:48:00.000Z"
   },
   {
-    "id": "org:cerebras",
-    "name": "Cerebras",
-    "kind": "org",
-    "slug": "cerebras",
-    "aliases": [],
-    "signal_count": 1,
-    "type_breakdown": {
-      "funding": 1
-    },
-    "first_seen_at": "2026-09-14T09:36:00.000Z",
-    "last_seen_at": "2026-09-14T12:00:00.000Z"
-  },
-  {
-    "id": "repo:vllm",
-    "name": "vLLM",
-    "kind": "repo",
-    "slug": "vllm",
-    "aliases": [],
-    "signal_count": 1,
-    "type_breakdown": {
-      "open_source_dev": 1
-    },
-    "first_seen_at": "2026-09-13T16:48:00.000Z",
-    "last_seen_at": "2026-09-13T19:12:00.000Z"
-  },
-  {
-    "id": "org:deepmind",
-    "name": "DeepMind",
-    "kind": "org",
-    "slug": "deepmind",
-    "aliases": [],
-    "signal_count": 1,
-    "type_breakdown": {
-      "research_breakthrough": 1
-    },
-    "first_seen_at": "2026-09-12T12:00:00.000Z",
-    "last_seen_at": "2026-09-12T14:24:00.000Z"
-  },
-  {
-    "id": "org:hugging-face",
-    "name": "Hugging Face",
-    "kind": "org",
-    "slug": "hugging-face",
+    "id": "product:azure-ai-foundry",
+    "name": "Azure AI Foundry",
+    "kind": "product",
+    "slug": "azure-ai-foundry",
     "aliases": [],
     "signal_count": 1,
     "type_breakdown": {
       "product_release": 1
     },
-    "first_seen_at": "2026-09-11T19:12:00.000Z",
-    "last_seen_at": "2026-09-11T21:36:00.000Z"
+    "first_seen_at": "2026-09-13T09:36:00.000Z",
+    "last_seen_at": "2026-09-13T12:00:00.000Z"
   },
   {
-    "id": "org:european-union",
-    "name": "European Union",
-    "kind": "org",
-    "slug": "european-union",
+    "id": "model:claude-4-6",
+    "name": "Claude 4.6",
+    "kind": "model",
+    "slug": "claude-4-6",
     "aliases": [],
     "signal_count": 1,
     "type_breakdown": {
-      "regulatory": 1
+      "model_release": 1
     },
-    "first_seen_at": "2026-09-11T07:12:00.000Z",
-    "last_seen_at": "2026-09-11T09:36:00.000Z"
+    "first_seen_at": "2026-08-11T16:52:47.254Z",
+    "last_seen_at": "2026-08-11T19:16:47.254Z"
   },
   {
-    "id": "regulation:eu-ai-act",
-    "name": "EU AI Act",
-    "kind": "regulation",
-    "slug": "eu-ai-act",
+    "id": "model:gemini-3-8-flash",
+    "name": "Gemini 3.8 Flash",
+    "kind": "model",
+    "slug": "gemini-3-8-flash",
     "aliases": [],
     "signal_count": 1,
     "type_breakdown": {
-      "regulatory": 1
+      "model_release": 1
     },
-    "first_seen_at": "2026-09-11T07:12:00.000Z",
-    "last_seen_at": "2026-09-11T09:36:00.000Z"
+    "first_seen_at": "2026-07-12T00:39:29.272Z",
+    "last_seen_at": "2026-07-12T03:03:29.272Z"
   },
   {
-    "id": "org:meta",
-    "name": "Meta",
-    "kind": "org",
-    "slug": "meta",
+    "id": "model:gemma-4",
+    "name": "Gemma 4",
+    "kind": "model",
+    "slug": "gemma-4",
     "aliases": [],
     "signal_count": 1,
     "type_breakdown": {
-      "hiring": 1
+      "leak": 1
     },
-    "first_seen_at": "2026-09-10T00:00:00.000Z",
-    "last_seen_at": "2026-09-10T02:24:00.000Z"
+    "first_seen_at": "2026-05-18T10:02:54.680Z",
+    "last_seen_at": "2026-05-18T12:26:54.680Z"
   }
 ]

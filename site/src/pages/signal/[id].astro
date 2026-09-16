@@ -1,18 +1,50 @@
 ---
 import Base from '../../layouts/Base.astro';
-import signalsData from '../../data/signals.json';
 import {
   bandColor, bandPhrase, statusColor, STATUS_LABELS, relativeTime,
   tierLabel, SIGNAL_TYPE_LABELS,
 } from '../../lib/display.ts';
 import type { Signal } from '../../../../pipeline/schema.ts';
 
+/** A related signal needs only these fields; carrying whole Signals would
+ *  bloat every page's props with the full corpus. */
+type RelatedRef = { id: string; title: string; score: number };
+
 export async function getStaticPaths() {
   const signals = (await import('../../data/signals.json')).default as Signal[];
-  return signals.map((s) => ({ params: { id: s.id }, props: { signal: s } }));
+
+  // Build an entity -> signal index once, rather than rescanning all signals
+  // for every page. At 260 signals the naive version is 67k comparisons and
+  // dominates build time; this is linear.
+  const byEntity = new Map<string, Signal[]>();
+  for (const s of signals) {
+    for (const e of s.entities) {
+      const arr = byEntity.get(e.id);
+      if (arr) arr.push(s);
+      else byEntity.set(e.id, [s]);
+    }
+  }
+
+  return signals.map((signal) => {
+    const seen = new Set<string>([signal.id]);
+    const related: RelatedRef[] = [];
+    for (const e of signal.entities) {
+      for (const cand of byEntity.get(e.id) ?? []) {
+        if (seen.has(cand.id)) continue;
+        seen.add(cand.id);
+        related.push({ id: cand.id, title: cand.title, score: cand.confidence.score });
+        if (related.length >= 4) break;
+      }
+      if (related.length >= 4) break;
+    }
+    return { params: { id: signal.id }, props: { signal, related } };
+  });
 }
 
-const { signal } = Astro.props as { signal: Signal };
+const { signal, related } = Astro.props as {
+  signal: Signal;
+  related: RelatedRef[];
+};
 const c = signal.confidence;
 
 // Ordered so the reader sees the largest contributor first.
@@ -22,11 +54,6 @@ const components = [
   { key: 'Internal consistency', value: c.components.consistency, max: 10 },
   { key: 'Model judgment', value: c.components.llm_assessment, max: 15 },
 ];
-
-const related = (signalsData as Signal[])
-  .filter((s) => s.id !== signal.id
-    && s.entities.some((e) => signal.entities.some((x) => x.id === e.id)))
-  .slice(0, 4);
 ---
 
 <Base title={`${signal.title} — Signal Index`} description={signal.summary}>
@@ -108,7 +135,7 @@ const related = (signalsData as Signal[])
                 {related.map((r) => (
                   <li>
                     <a href={`/signal/${r.id}`}>{r.title}</a>
-                    <span class="related-score">{r.confidence.score}</span>
+                    <span class="related-score num">{r.score}</span>
                   </li>
                 ))}
               </ul>

@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import SignalRow from '../components/SignalRow.astro';
+import CategoryNav from '../components/CategoryNav.astro';
 import feedData from '../data/feed.json';
+import metaData from '../data/meta.json';
 import {
   groupByDay, bandColor, SIGNAL_TYPE_LABELS, type FeedEntry,
 } from '../lib/display.ts';
@@ -14,17 +16,34 @@ const live = feed.filter((e) => e.status !== 'debunked' && e.status !== 'stale')
 const days = groupByDay(live);
 
 const lead = live[0];
+
+/** The front page shows the most recent slice; categories hold the rest. */
+const FRONT_PAGE_LIMIT = 60;
+const shown = new Set(live.slice(0, FRONT_PAGE_LIMIT).map((e) => e.id));
+
 const rest = days
-  .map((d) => ({ ...d, entries: d.entries.filter((e) => e.id !== lead?.id) }))
+  .map((d) => ({
+    ...d,
+    entries: d.entries.filter((e) => e.id !== lead?.id && shown.has(e.id)),
+  }))
   .filter((d) => d.entries.length > 0);
 
+const corpusDocs = (metaData as { corpus_documents?: number }).corpus_documents ?? 0;
+const sourceFeeds = (metaData as { source_feeds?: number }).source_feeds ?? 0;
 const corroborated = live.filter((e) => e.corroboration_count >= 3).length;
 const primarySourced = live.filter((e) => e.top_sources.some((s) => s.tier === 1)).length;
 const verified = live.filter((e) => e.confidence_band === 'verified').length;
 const mean = Math.round(live.reduce((a, e) => a + e.confidence_score, 0) / live.length);
 
 // Ascending, so the plot reads as a distribution rather than a bar chart.
-const spectrum = [...live].sort((a, b) => a.confidence_score - b.confidence_score);
+// Capped: past ~90 ticks the bars fall below 2px and the row overflows the
+// viewport. An evenly-spaced sample preserves the distribution's shape.
+const PLOT_TICKS = 90;
+const sorted = [...live].sort((a, b) => a.confidence_score - b.confidence_score);
+const spectrum = sorted.length <= PLOT_TICKS
+  ? sorted
+  : Array.from({ length: PLOT_TICKS }, (_, i) =>
+      sorted[Math.round((i * (sorted.length - 1)) / (PLOT_TICKS - 1))]);
 
 // Only categories with enough volume to be worth scanning.
 const typeCounts = live.reduce<Record<string, number>>((acc, e) => {
@@ -82,6 +101,14 @@ const showCatBars = maxType > 1;
   <section class="metrics">
     <div class="shell metrics-grid">
       <div class="metric">
+        <span class="m-v num">{corpusDocs.toLocaleString('en-US')}</span>
+        <span class="m-k">DOCUMENTS INGESTED</span>
+      </div>
+      <div class="metric">
+        <span class="m-v num">{sourceFeeds}</span>
+        <span class="m-k">SOURCE FEEDS</span>
+      </div>
+      <div class="metric">
         <span class="m-v num">{String(live.length).padStart(2, '0')}</span>
         <span class="m-k">SIGNALS LIVE</span>
       </div>
@@ -93,12 +120,10 @@ const showCatBars = maxType > 1;
         <span class="m-v num">{String(corroborated).padStart(2, '0')}</span>
         <span class="m-k">CORROBORATED 3+</span>
       </div>
-      <div class="metric">
-        <span class="m-v num">{String(primarySourced).padStart(2, '0')}</span>
-        <span class="m-k">PRIMARY SOURCED</span>
-      </div>
     </div>
   </section>
+
+  <div class="shell"><CategoryNav /></div>
 
   {lead && (
     <section class="lead-wrap">
@@ -143,6 +168,13 @@ const showCatBars = maxType > 1;
             {day.entries.map((entry) => <SignalRow entry={entry} />)}
           </div>
         ))}
+
+        {live.length > FRONT_PAGE_LIMIT && (
+          <p class="more-note">
+            Showing the {FRONT_PAGE_LIMIT} most recent of {live.length} live
+            signals. Browse by category above for the rest.
+          </p>
+        )}
       </div>
 
       <aside class="rail">
@@ -246,9 +278,9 @@ const showCatBars = maxType > 1;
   /* Each tick is one signal, height = confidence. Narrow by design: this must
      still read as a distribution at several hundred signals. */
   .tick {
-    flex: 1 1 12px;
+    flex: 1 1 0;
     max-width: 20px;
-    min-width: 2px;
+    min-width: 0;
     height: var(--h);
     background: var(--c);
     opacity: 0.85;
@@ -270,7 +302,7 @@ const showCatBars = maxType > 1;
 
   .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
   .metric {
     display: flex;
@@ -280,7 +312,7 @@ const showCatBars = maxType > 1;
     border-right: var(--rule);
   }
   .metric:last-child { border-right: 0; }
-  .m-v { font-size: var(--t-xl); font-weight: 500; line-height: 1; }
+  .m-v { font-size: clamp(1.05rem, 1.5vw, var(--t-xl)); font-weight: 500; line-height: 1; }
   .m-k {
     font-family: var(--mono);
     font-size: var(--t-2xs);
@@ -372,6 +404,15 @@ const showCatBars = maxType > 1;
     margin: 0 0 var(--gap-2);
     padding-bottom: var(--gap-2);
     border-bottom: 1px solid var(--line-bright);
+  }
+
+  .more-note {
+    margin: var(--gap-4) 0 0;
+    padding-top: var(--gap-4);
+    border-top: var(--rule);
+    font-size: var(--t-sm);
+    color: var(--text-faint);
+    max-width: 52ch;
   }
 
   .rail {

@@ -170,7 +170,11 @@ export interface Signal {
   why_it_matters: string;
 
   entities: EntityRef[];
-  /** Drives entity-page assignment. Must appear in `entities`. */
+  /**
+   * Drives entity-page assignment. Must appear in `entities`, or be empty
+   * when the signal has no single subject (an industry-wide campaign, a
+   * general research result).
+   */
   primary_entity_id: string;
 
   status: SignalStatus;

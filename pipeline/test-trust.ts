@@ -207,6 +207,37 @@ const ENTITIES = ['OpenAI', 'GPT-5.5', 'ChatGPT', 'Sam Altman'];
     JSON.stringify(analysis.violations));
 }
 
+console.log('\n=== GUARD: sentence-initial words ===');
+{
+  // Capitalization at the start of a sentence is grammar, not a proper noun.
+  // Treating it as an entity quarantines valid copy; a guard that cries wolf
+  // gets ignored, so false positives matter nearly as much as misses.
+  const validOpeners = runGuard({
+    title: 'Anthropic prepares an enterprise product',
+    summary: 'Anthropic is developing an enterprise product. Details on timing were not given. Terms were not disclosed.',
+    why_it_matters: 'Enterprise tooling is where pricing becomes defensible.',
+    sourceTexts: ['Anthropic is developing an enterprise product. Details on timing were not given. Terms were not disclosed.'],
+    knownEntities: ['Anthropic'],
+  });
+  check('common words opening a sentence are not treated as entities',
+    validOpeners.passed, JSON.stringify(validOpeners.violations));
+
+  // ...but the relaxation must not create a hole a fabrication can slip through.
+  const SRC = ['OpenAI today announced GPT-5.5, a new flagship model.'];
+  const ENTS = ['OpenAI', 'GPT-5.5'];
+  for (const [label, summary] of [
+    ['multi-word org', 'OpenAI shipped GPT-5.5. Anthropic Labs responded within hours.'],
+    ['CamelCase org', 'OpenAI shipped GPT-5.5. DeepSeek released a rival model.'],
+    ['model identifier', 'OpenAI shipped GPT-5.5. Claude 6 arrived the same day.'],
+  ] as const) {
+    const g = runGuard({
+      title: 'OpenAI releases GPT-5.5', summary, why_it_matters: 'x',
+      sourceTexts: SRC, knownEntities: ENTS,
+    });
+    check(`fabricated ${label} still caught at sentence start`, !g.passed);
+  }
+}
+
 console.log(`\n${'='.repeat(60)}`);
 console.log(`  ${passed} passed, ${failed} failed`);
 console.log('='.repeat(60));

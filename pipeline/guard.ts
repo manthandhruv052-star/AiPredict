@@ -106,10 +106,20 @@ function extractEntityMentions(text: string): string[] {
   const out = new Set<string>();
 
   // Capitalized sequences, e.g. "OpenAI", "Mistral AI", "Sam Altman".
+  // Sentence-initial position is skipped for single words: capitalization
+  // there is grammar, not evidence of a proper noun. Multi-word runs and
+  // internally-capitalized words (OpenAI, arXiv) are still caught anywhere.
   for (const m of text.matchAll(/\b[A-Z][A-Za-z0-9]*(?:\s+[A-Z][A-Za-z0-9]*)*\b/g)) {
     const v = m[0].trim();
-    // Skip sentence-initial common words; they're not entities.
     if (v.length < 3) continue;
+
+    const at = m.index ?? 0;
+    const before = text.slice(0, at).trimEnd();
+    const sentenceInitial = at === 0 || /[.!?:]$/.test(before);
+    const singleWord = !/\s/.test(v);
+    const internallyCapped = /[a-z][A-Z]/.test(v) || /^[a-z]+[A-Z]/.test(v);
+
+    if (sentenceInitial && singleWord && !internallyCapped) continue;
     out.add(v);
   }
   // Model identifiers: GPT-5, Claude 4.5, Llama-3.1, Gemini 2.
@@ -129,6 +139,13 @@ const ENTITY_STOPWORDS = new Set([
   'New', 'Now', 'Both', 'Several', 'Multiple', 'Many', 'Some', 'One', 'Two',
   'Analysis', 'Reportedly', 'Sources', 'Industry', 'Company', 'Researchers',
   'If', 'In', 'On', 'At', 'For', 'To', 'By', 'With', 'From', 'As', 'But',
+  // Sentence-initial nouns that routinely open a summary sentence. Without
+  // these the guard quarantines valid copy — a false positive is nearly as
+  // damaging as a miss, because it silently drops real signals.
+  'Details', 'Terms', 'Neither', 'Reports', 'Security', 'Investors',
+  'Release', 'Configuration', 'Model', 'Recent', 'Three', 'Each', 'Every',
+  'People', 'Researcher', 'Users', 'Customers', 'Enterprise', 'Open',
+  'Its', 'Their', 'His', 'Her', 'Our', 'Your', 'No', 'Not', 'Only', 'Also',
 ]);
 
 export function runGuard(input: GuardInput): GuardResult {
